@@ -6,42 +6,42 @@
 <title>Colagem CGB</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: sans-serif; background: #1a1a1a; color: #eee; min-height: 100vh; padding: 12px; }
+  body { font-family: sans-serif; background: #f0f0f0; color: #222; min-height: 100vh; padding: 12px; }
   header { display: flex; align-items: center; justify-content: center; padding: 10px 0 14px; }
   header img { height: 44px; }
   #drop-zone {
-    border: 2px dashed #555; border-radius: 12px; padding: 28px 16px;
+    border: 2px dashed #bbb; border-radius: 12px; padding: 28px 16px;
     text-align: center; cursor: pointer; margin-bottom: 12px;
-    background: #222; transition: background 0.2s;
+    background: #fff; transition: background 0.2s;
   }
-  #drop-zone:active { background: #2a2a2a; }
+  #drop-zone:active { background: #f5f5f5; }
   #drop-zone .icon { font-size: 36px; }
-  #drop-zone p { color: #aaa; font-size: 14px; margin-top: 6px; }
-  #drop-zone small { color: #555; font-size: 12px; }
+  #drop-zone p { color: #666; font-size: 14px; margin-top: 6px; }
+  #drop-zone small { color: #aaa; font-size: 12px; }
   .row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; align-items: flex-end; }
   .grupo { display: flex; flex-direction: column; gap: 3px; }
-  .grupo label { font-size: 12px; color: #888; }
+  .grupo label { font-size: 12px; color: #666; }
   select {
     font-size: 14px; padding: 7px 10px; border-radius: 8px;
-    border: 1px solid #444; background: #2a2a2a; color: #eee;
+    border: 1px solid #ccc; background: #fff; color: #222;
   }
   .btn { padding: 9px 18px; font-size: 14px; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; transition: background 0.2s; }
   .btn-gerar { background: #b8001f; color: #fff; }
   .btn-gerar:active { background: #90001a; }
   .btn-baixar { background: #1a7a3a; color: #fff; display: none; }
   .btn-baixar:active { background: #155f2c; }
-  .btn-limpar { background: #444; color: #eee; }
+  .btn-limpar { background: #ddd; color: #333; }
   #preview-strip { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; min-height: 4px; }
   .thumb-wrap { position: relative; display: inline-block; }
-  .thumb-wrap img { width: 68px; height: 68px; object-fit: cover; border-radius: 8px; border: 2px solid #333; display: block; }
+  .thumb-wrap img { width: 68px; height: 68px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd; display: block; }
   .remover {
     position: absolute; top: 2px; right: 2px; width: 20px; height: 20px;
-    background: rgba(0,0,0,0.75); border: none; border-radius: 50%;
+    background: rgba(0,0,0,0.6); border: none; border-radius: 50%;
     color: #fff; font-size: 13px; cursor: pointer; display: flex;
     align-items: center; justify-content: center; padding: 0;
   }
-  canvas { width: 100%; border-radius: 10px; display: none; margin-top: 8px; }
-  #status { font-size: 13px; color: #777; text-align: center; margin-top: 8px; min-height: 18px; }
+  canvas { width: 100%; border-radius: 10px; display: none; margin-top: 8px; border: 1px solid #ddd; }
+  #status { font-size: 13px; color: #888; text-align: center; margin-top: 8px; min-height: 18px; }
 </style>
 </head>
 <body>
@@ -145,54 +145,74 @@ function renderPreviews() {
   });
 }
 
-function getDate() {
+function getDateTime() {
   const now = new Date();
-  return now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const data = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const hora = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  return data + ' às ' + hora;
 }
 
 function drawCabecalho(ctx, W, cabH) {
-  ctx.fillStyle = '#1a1a1a';
+  ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, W, cabH);
 
-  if (logoImg) {
-    const logoH = cabH * 0.65;
-    const logoW = logoImg.naturalWidth * (logoH / logoImg.naturalHeight);
-    const logoX = (W - logoW) / 2;
-    const logoY = (cabH - logoH) / 2;
-    ctx.drawImage(logoImg, logoX, logoY, logoW, logoH);
-  }
-}
+  const logoH = cabH * 0.45;
+  const logoW = logoImg ? logoImg.naturalWidth * (logoH / logoImg.naturalHeight) : 0;
+  const logoY = cabH * 0.12;
+  const logoX = (W - logoW) / 2;
 
-function drawRodape(ctx, W, rodapeH, rodapeY) {
-  ctx.fillStyle = '#1a1a1a';
-  ctx.fillRect(0, rodapeY, W, rodapeH);
-
-  const fontSize = Math.round(W * 0.022);
-  ctx.font = 'bold ' + fontSize + 'px sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(FRASE, W / 2, rodapeY + rodapeH * 0.38);
+  if (logoImg) ctx.drawImage(logoImg, logoX, logoY, logoW, logoH);
 
   const dateFontSize = Math.round(W * 0.016);
   ctx.font = dateFontSize + 'px sans-serif';
-  ctx.fillStyle = '#aaaaaa';
-  ctx.fillText(getDate(), W / 2, rodapeY + rodapeH * 0.72);
+  ctx.fillStyle = '#888888';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(getDateTime(), W / 2, logoY + logoH + (cabH * 0.22));
+
+  ctx.strokeStyle = '#e0e0e0';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, cabH - 1);
+  ctx.lineTo(W, cabH - 1);
+  ctx.stroke();
+
+  ctx.textAlign = 'start';
+  ctx.textBaseline = 'alphabetic';
+}
+
+function drawRodape(ctx, W, rodapeH, rodapeY) {
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, rodapeY, W, rodapeH);
+
+  ctx.strokeStyle = '#e0e0e0';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, rodapeY + 1);
+  ctx.lineTo(W, rodapeY + 1);
+  ctx.stroke();
+
+  const fontSize = Math.round(W * 0.022);
+  ctx.font = 'bold ' + fontSize + 'px sans-serif';
+  ctx.fillStyle = '#222222';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(FRASE, W / 2, rodapeY + rodapeH / 2);
 
   ctx.textAlign = 'start';
   ctx.textBaseline = 'alphabetic';
 }
 
 function buildCanvas(imgs, W, gap, photosH, canvas, ctx, drawPhotos) {
-  const cabH = 90;
+  const cabH = 120;
   const rodapeH = 80;
   const H = cabH + photosH + rodapeH;
 
   canvas.width = W;
   canvas.height = H;
 
-  ctx.fillStyle = '#111';
-  ctx.fillRect(0, cabH, W, photosH);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, W, H);
 
   drawCabecalho(ctx, W, cabH);
   drawPhotos(cabH);
@@ -217,7 +237,6 @@ function generateCollage() {
     const smW = Math.floor((W - gap * (smCount - 1)) / smCount);
     const smH = Math.round(smW * 0.65);
     const photosH = mainH + gap + smH;
-
     buildCanvas(imgs, W, gap, photosH, canvas, ctx, (offsetY) => {
       drawCover(ctx, imgs[0], 0, offsetY, W, mainH);
       for (let i = 0; i < smCount; i++) {
@@ -268,7 +287,7 @@ function showCanvas(canvas) {
 function downloadCollage() {
   const canvas = document.getElementById('collage-canvas');
   const a = document.createElement('a');
-  const date = getDate().replace(/\//g, '-');
+  const date = new Date().toLocaleDateString('pt-BR').replace(/\//g, '-');
   a.download = 'colagem_cgb_' + date + '.jpg';
   canvas.toBlob(blob => { a.href = URL.createObjectURL(blob); a.click(); }, 'image/jpeg', 0.93);
 }
