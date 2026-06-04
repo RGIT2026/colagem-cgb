@@ -3,375 +3,340 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colagem CGB - Versão 2.0</title>
+<title>Colagem CGB - Logo Dupla v4.1</title>
 <style>
+  :root { --cgb-red: #b8001f; --cgb-dark: #1c1e21; --cgb-gray: #f0f2f5; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; color: #333; min-height: 100vh; padding: 20px; }
+  body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--cgb-gray); color: var(--cgb-dark); min-height: 100vh; padding: 10px; }
   
-  .container { max-width: 850px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+  .container { max-width: 950px; margin: 0 auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.12); border: 1px solid #e0e0e0; }
   
-  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
+  .top-accent { height: 6px; background: linear-gradient(90deg, var(--cgb-red) 0%, #ff4d6d 50%, var(--cgb-dark) 100%); width: 100%; }
+
+  header { display: flex; align-items: center; justify-content: space-between; padding: 20px; background: #fff; }
   header img { height: 45px; }
-  header h1 { font-size: 1.4rem; color: #b8001f; }
+  header h1 { font-size: 1.4rem; color: var(--cgb-red); font-weight: 800; }
+
+  .main-content { padding: 0 20px 20px 20px; }
 
   #drop-zone {
     border: 2px dashed #cbd5e0; border-radius: 12px; padding: 35px 20px;
     text-align: center; cursor: pointer; margin-bottom: 20px;
     background: #fafafa; transition: all 0.3s ease;
   }
-  #drop-zone:hover { background: #f0f4f8; border-color: #b8001f; }
-  #drop-zone .icon { font-size: 40px; margin-bottom: 10px; }
-  #drop-zone p { color: #4a5568; font-weight: 600; }
-  #drop-zone small { color: #a0aec0; }
+  #drop-zone:hover { background: #f1f5f9; border-color: var(--cgb-red); }
+  #drop-zone .icon { font-size: 36px; margin-bottom: 8px; display: block; }
 
-  .controls-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 10px; }
-  .grupo { display: flex; flex-direction: column; gap: 5px; }
-  .grupo label { font-size: 12px; font-weight: bold; color: #555; text-transform: uppercase; }
-  select, input[type="text"], input[type="color"] {
-    font-size: 14px; padding: 10px; border-radius: 6px;
-    border: 1px solid #ddd; background: #fff; width: 100%; outline: none;
-  }
-  select:focus, input:focus { border-color: #b8001f; }
-  input[type="color"] { height: 40px; padding: 2px; cursor: pointer; }
-
-  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-  .btn { flex: 1; min-width: 140px; padding: 14px; font-size: 14px; font-weight: 700; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn:active { transform: translateY(1px); }
+  .panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; margin-bottom: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
   
-  .btn-gerar { background: #b8001f; color: #fff; box-shadow: 0 4px 0 #800015; }
-  .btn-gerar:hover { background: #d30024; }
-  .btn-baixar { background: #2d3748; color: #fff; display: none; box-shadow: 0 4px 0 #1a202c; }
-  .btn-baixar:hover { background: #3e4c5f; }
-  .btn-limpar { background: #edf2f7; color: #4a5568; border: 1px solid #cbd5e0; }
-  .btn-limpar:hover { background: #e2e8f0; }
-
-  #preview-strip { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; padding: 10px; background: #fdfdfd; border-radius: 8px; border: 1px solid #eee; min-height: 50px; }
-  .thumb-wrap { position: relative; animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-  .thumb-wrap img { width: 85px; height: 85px; object-fit: cover; border-radius: 8px; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-  .remover {
-    position: absolute; top: -8px; right: -8px; width: 24px; height: 24px;
-    background: #e53e3e; border: 2px solid #fff; border-radius: 50%;
-    color: #fff; font-size: 11px; cursor: pointer; font-weight: bold;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; }
+  
+  select, input[type="text"], input[type="color"] {
+    font-size: 14px; padding: 10px; border-radius: 8px;
+    border: 1px solid #cbd5e0; background: #fff; width: 100%; outline: none;
   }
+  input:focus, select:focus { border-color: var(--cgb-red); }
 
-  .canvas-container { width: 100%; overflow-x: auto; margin-top: 15px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); display: none; background: #eee; }
+  .loc-group { display: flex; gap: 10px; margin-top: 15px; }
+  .btn-gps { background: var(--cgb-dark); color: #fff; border: none; padding: 0 15px; border-radius: 8px; cursor: pointer; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .btn { flex: 1; min-width: 150px; padding: 15px; font-size: 15px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; }
+  
+  .btn-gerar { background: var(--cgb-red); color: #fff; box-shadow: 0 4px 14px rgba(184, 0, 31, 0.2); }
+  .btn-baixar { background: var(--cgb-dark); color: #fff; display: none; }
+  .btn-limpar { background: #fff; color: #64748b; border: 1px solid #cbd5e0; }
+
+  #preview-strip { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; padding: 12px; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; min-height: 50px; }
+  .thumb { position: relative; }
+  .thumb img { width: 75px; height: 75px; object-fit: cover; border-radius: 8px; }
+  .del { position: absolute; top: -6px; right: -6px; width: 22px; height: 22px; background: #ef4444; color: #fff; border-radius: 50%; border: none; cursor: pointer; font-weight: bold; }
+
+  .canvas-wrap { width: 100%; overflow-x: auto; margin-top: 20px; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); display: none; }
   canvas { display: block; max-width: 100%; height: auto; margin: 0 auto; }
   
-  #status { font-size: 14px; color: #4a5568; text-align: center; margin-top: 15px; font-weight: 600; min-height: 20px; }
+  #status { font-size: 14px; color: #64748b; text-align: center; margin-top: 15px; font-weight: 700; }
 </style>
 </head>
 <body>
 
 <div class="container">
+  <div class="top-accent"></div>
   <header>
-    <img id="ui-logo" src="" alt="CGB Logo">
-    <h1>Colagem CGB <small style="font-size: 0.8rem; color: #888;">v2.0</small></h1>
+    <div id="logo-box"></div>
+    <h1>CGB COLLAGE <small style="font-size: 0.7rem; color: #94a3b8;">LOGO DUPLA v4.1</small></h1>
   </header>
 
-  <div id="drop-zone" onclick="document.getElementById('file-input').click()">
-    <div class="icon">🖼️</div>
-    <p>Clique aqui para selecionar as fotos</p>
-    <small>Até 12 imagens • Formatos JPG, PNG</small>
-  </div>
-  <input type="file" id="file-input" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+  <div class="main-content">
+    <div id="drop-zone" onclick="document.getElementById('file-input').click()">
+      <span class="icon">🖼️</span>
+      <p>Clique para adicionar as fotos</p>
+      <small>Limite de 12 imagens</small>
+    </div>
+    <input type="file" id="file-input" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
 
-  <div id="preview-strip"></div>
+    <div id="preview-strip"></div>
 
-  <div class="controls-grid">
-    <div class="grupo">
-      <label>Estilo de Layout</label>
-      <select id="layout-select">
-        <option value="auto">Automático</option>
-        <option value="1col">Lista (1 Coluna)</option>
-        <option value="2col">Lado a Lado (2 Col.)</option>
-        <option value="3col">Grade (3 Colunas)</option>
-        <option value="featured">Destaque Superior</option>
-      </select>
-    </div>
-    <div class="grupo">
-      <label>Espaço entre Fotos</label>
-      <select id="gap-select">
-        <option value="0">Sem bordas</option>
-        <option value="8" selected>Fino (8px)</option>
-        <option value="20">Médio (20px)</option>
-        <option value="40">Largo (40px)</option>
-      </select>
-    </div>
-    <div class="grupo">
-      <label>Formato da Foto</label>
-      <select id="aspect-select">
-        <option value="0.75" selected>4:3 (Retangular)</option>
-        <option value="1">1:1 (Quadrado)</option>
-        <option value="0.5625">16:9 (Cinema)</option>
-        <option value="1.33">3:4 (Retrato)</option>
-      </select>
-    </div>
-    <div class="grupo">
-      <label>Cor do Fundo</label>
-      <input type="color" id="bg-color" value="#ffffff">
-    </div>
-  </div>
+    <div class="panel">
+      <div class="grid-3">
+        <div class="field">
+          <label>Estilo de Layout</label>
+          <select id="layout-select">
+            <option value="auto">Automático</option>
+            <option value="2col">2 Colunas</option>
+            <option value="3col">3 Colunas</option>
+            <option value="featured">Destaque</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Espaçamento</label>
+          <select id="gap-select">
+            <option value="0">Sem espaço</option>
+            <option value="12" selected>Padrão (12px)</option>
+            <option value="25">Largo (25px)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Cor do Fundo</label>
+          <input type="color" id="bg-color" value="#ffffff">
+        </div>
+      </div>
 
-  <div class="controls-grid">
-    <div class="grupo" style="grid-column: span 2;">
-      <label>Mensagem de Rodapé</label>
-      <input type="text" id="footer-text" placeholder="Digite sua frase aqui..." value="SEGURANÇA ATIVA NOSSO DNA 🧬">
-    </div>
-    <div class="grupo">
-      <label>Cor do Texto</label>
-      <input type="color" id="text-color" value="#1a202c">
-    </div>
-  </div>
+      <div class="loc-group">
+        <div class="field" style="flex: 1;">
+          <label>Localização</label>
+          <input type="text" id="loc-input" placeholder="Ex: São Paulo, SP">
+        </div>
+        <button class="btn-gps" onclick="getLocation()">📍 GPS</button>
+      </div>
 
-  <div class="actions">
-    <button class="btn btn-gerar" onclick="generateCollage()">⚡ GERAR COLAGEM</button>
-    <button class="btn btn-baixar" id="btn-baixar" onclick="downloadCollage()">⬇️ BAIXAR IMAGEM</button>
-    <button class="btn btn-limpar" onclick="limpar()">🗑️ LIMPAR</button>
+      <div class="field" style="margin-top: 15px;">
+        <label>Frase do Rodapé</label>
+        <input type="text" id="footer-text" value="SEGURANÇA ATIVA NOSSO DNA 🧬">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-gerar" onclick="generateCollage()">⚡ GERAR POST</button>
+      <button class="btn btn-baixar" id="btn-baixar" onclick="downloadCollage()">⬇️ BAIXAR IMAGEM</button>
+      <button class="btn btn-limpar" onclick="limpar()">🗑️ LIMPAR</button>
+    </div>
+    
+    <div class="canvas-wrap" id="canvas-wrap">
+      <canvas id="main-canvas"></canvas>
+    </div>
+    
+    <p id="status"></p>
   </div>
-  
-  <div class="canvas-container" id="canvas-container">
-    <canvas id="collage-canvas"></canvas>
-  </div>
-  
-  <p id="status"></p>
 </div>
 
 <script>
-// NOVA LOGO EM BASE64
-const LOGO_SRC = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAB2ASwDASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAAAAIDBAUBBv/EABkBAQEBAQEBAAAAAAAAAAAAAAREAQIDBUv/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUG/9oADAMBAAIRAxEAPwD58AvmRvSoxrao6CwAAAAAAAAAAAAAAAAA1TUbLoTrgIU3+2YV1N5AsPdRk96HpzXSqMSUQAlXnP86Q5rdlKwGm4wN4wN8TEtqNWiUc/QHjUY0eue8T0Z9C5w++adcd0yDLnOkyayGDpYqq3Ua4FBe5thu89HPjpzVttjKCnGdJj2Dn9DCdKMj6dWTRhcoXmvvw7c9NkZwe+Doc/pa+ehOmMYpdSLq4jbbGUec/bhonuOe6A53t9RvEV06hVaEefpzV1oPM/SZ9BnmtS8iwnRJHxrF0edt1wW1W+Rzl6o3WyijNu59b50XxDB0spDVl0lgMaF1aRGGvR5UtNdkOd0eeWa+dc99jyE6nniecnhWVDXMnBfLo+8/RGhWLPKc5KoqW/nSOgonFiqg2Mwza8mitTOjQzjQz1l2MoCzRjsnroGehmQ1zBfMAAAAAAAAAAAAAAACzwm4C4AAAAAAAAAAAAAAA//2Q==";
+const LOGO_DATA = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAB2ASwDASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAAAAIDBAUBBv/EABkBAQEBAQEBAAAAAAAAAAAAAAREAQIDBUv/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUG/9oADAMBAAIRAxEAPwD58AvmRvSoxrao6CwAAAAAAAAAAAAAAAAA1TUbLoTrgIU3+2YV1N5AsPdRk96HpzXSqMSUQAlXnP86Q5rdlKwGm4wN4wN8TEtqNWiUc/QHjUY0eue8T0Z9C5w++adcd0yDLnOkyayGDpYqq3Ua4FBe5thu89HPjpzVttjKCnGdJj2Dn9DCdKMj6dWTRhcoXmvvw7c9NkZwe+Doc/pa+ehOmMYpdSLq4jbbGUec/bhonuOe6A53t9RvEV06hVaEefpzV1oPM/SZ9BnmtS8iwnRJHxrF0edt1wW1W+Rzl6o3WyijNu59b50XxDB0spDVl0lgMaF1aRGGvR5UtNdkOd0eeWa+dc99jyE6nniecnhWVDXMnBfLo+8/RGhWLPKc5KoqW/nSOgonFiqg2Mwza8mitTOjQzjQz1l2MoCzRjsnroGehmQ1zBfMAAAAAAAAAAAAAAACzwm4C4AAAAAAAAAAAAAAA//2Q==";
 
-let imageFiles = [];
-let loadedImages = [];
-let logoImg = null;
+let images = [];
+let loadedImgs = [];
+let logo = null;
 
 // UI Setup
-document.getElementById('ui-logo').src = LOGO_SRC;
+const uiLogo = new Image(); uiLogo.src = LOGO_DATA;
+document.getElementById('logo-box').appendChild(uiLogo);
 
-const logoLoader = new Image();
-logoLoader.onload = () => { logoImg = logoLoader; };
-logoLoader.src = LOGO_SRC;
+const lLoader = new Image();
+lLoader.onload = () => { logo = lLoader; };
+lLoader.src = LOGO_DATA;
 
-function handleFiles(files) {
-  const arr = Array.from(files).filter(f => f.type.startsWith('image/'));
-  if (imageFiles.length + arr.length > 12) {
-    setStatus('⚠️ Máximo de 12 imagens permitido.');
-  }
-  imageFiles = [...imageFiles, ...arr].slice(0, 12);
-  loadImages();
+async function getLocation() {
+  if (!navigator.geolocation) return setStatus('GPS não suportado');
+  setStatus('📡 Localizando...');
+  navigator.geolocation.getCurrentPosition(async (p) => {
+    const { latitude, longitude } = p.coords;
+    try {
+      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+      const d = await r.json();
+      const city = d.address.city || d.address.town || d.address.village || "";
+      const state = d.address.state || "";
+      document.getElementById('loc-input').value = city ? `${city}, ${state}` : `${latitude.toFixed(3)}, ${longitude.toFixed(3)}`;
+      setStatus('📍 Localizado!');
+    } catch (e) {
+      document.getElementById('loc-input').value = `${latitude.toFixed(3)}, ${longitude.toFixed(3)}`;
+    }
+  }, () => setStatus('Permissão negada'));
 }
 
-function loadImages() {
-  loadedImages = [];
+function handleFiles(f) {
+  const a = Array.from(f).filter(i => i.type.startsWith('image/'));
+  images = [...images, ...a].slice(0, 12);
+  loadAll();
+}
+
+function loadAll() {
+  loadedImgs = [];
   document.getElementById('preview-strip').innerHTML = '';
-  if (!imageFiles.length) return;
-  setStatus('⏳ Carregando fotos...');
-  let loaded = 0;
-  imageFiles.forEach((file, i) => {
+  if (!images.length) return;
+  setStatus('⏳ Processando...');
+  let c = 0;
+  images.forEach((f, i) => {
     const img = new Image();
     img.onload = () => {
-      loadedImages[i] = img;
-      loaded++;
-      if (loaded === imageFiles.length) {
-        renderPreviews();
-        setStatus('✨ ' + imageFiles.length + ' fotos prontas. Clique em Gerar!');
-      }
+      loadedImgs[i] = img;
+      c++;
+      if (c === images.length) { renderThumbs(); setStatus('✨ Fotos prontas!'); }
     };
-    img.src = URL.createObjectURL(file);
+    img.src = URL.createObjectURL(f);
   });
 }
 
-function renderPreviews() {
-  const strip = document.getElementById('preview-strip');
-  strip.innerHTML = '';
-  imageFiles.forEach((file, i) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'thumb-wrap';
-    const thumb = document.createElement('img');
-    thumb.src = URL.createObjectURL(file);
-    const btn = document.createElement('button');
-    btn.className = 'remover';
-    btn.innerHTML = '✕';
-    btn.onclick = () => { 
-        imageFiles.splice(i, 1); 
-        loadImages(); 
-        if(imageFiles.length === 0) limpar();
-    };
-    wrap.appendChild(thumb);
-    wrap.appendChild(btn);
-    strip.appendChild(wrap);
+function renderThumbs() {
+  const s = document.getElementById('preview-strip');
+  s.innerHTML = '';
+  images.forEach((f, i) => {
+    const w = document.createElement('div'); w.className = 'thumb';
+    const t = document.createElement('img'); t.src = URL.createObjectURL(f);
+    const b = document.createElement('button'); b.className = 'del'; b.innerHTML = '×';
+    b.onclick = () => { images.splice(i, 1); loadAll(); };
+    w.append(t, b); s.append(w);
   });
-}
-
-function getDateTime() {
-  const now = new Date();
-  const data = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-  const hora = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-  return data + ' ' + hora;
-}
-
-function drawHeader(ctx, W, cabH, bgColor, textColor) {
-  ctx.fillStyle = bgColor;
-  ctx.fillRect(0, 0, W, cabH);
-
-  const padding = W * 0.04;
-  const dateFontSize = Math.round(W * 0.02);
-  ctx.font = '500 ' + dateFontSize + 'px sans-serif';
-  ctx.fillStyle = textColor;
-  ctx.globalAlpha = 0.5;
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(getDateTime(), padding, cabH / 2);
-  ctx.globalAlpha = 1.0;
-
-  ctx.strokeStyle = '#e2e8f0';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(0, cabH - 1);
-  ctx.lineTo(W, cabH - 1);
-  ctx.stroke();
-}
-
-function drawFooter(ctx, W, rodapeH, rodapeY, bgColor, textColor, phrase) {
-  ctx.fillStyle = bgColor;
-  ctx.fillRect(0, rodapeY, W, rodapeH);
-
-  ctx.strokeStyle = '#e2e8f0';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(0, rodapeY + 1);
-  ctx.lineTo(W, rodapeY + 1);
-  ctx.stroke();
-
-  const padding = W * 0.04;
-  
-  // FRASE CENTRALIZADA (OU LEVEMENTE PARA A ESQUERDA)
-  const fontSize = Math.round(W * 0.028);
-  ctx.font = 'bold ' + fontSize + 'px sans-serif';
-  ctx.fillStyle = textColor;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(phrase, W / 2, rodapeY + rodapeH / 2);
-
-  // LOGO NO CANTO DIREITO INFERIOR
-  if (logoImg) {
-    const logoH = rodapeH * 0.6;
-    const logoW = logoImg.naturalWidth * (logoH / logoImg.naturalHeight);
-    const logoX = W - logoW - padding;
-    const logoY = rodapeY + (rodapeH - logoH) / 2;
-    ctx.drawImage(logoImg, logoX, logoY, logoW, logoH);
-  }
-}
-
-function buildCanvas(imgs, W, gap, photosH, canvas, ctx, bgColor, textColor, phrase, drawPhotos) {
-  const cabH = 80;
-  const rodapeH = 90;
-  const H = cabH + photosH + rodapeH;
-
-  canvas.width = W;
-  canvas.height = H;
-
-  ctx.fillStyle = bgColor;
-  ctx.fillRect(0, 0, W, H);
-
-  drawHeader(ctx, W, cabH, bgColor, textColor);
-  drawPhotos(cabH);
-  drawFooter(ctx, W, rodapeH, cabH + photosH, bgColor, textColor, phrase);
-  
-  document.getElementById('canvas-container').style.display = 'block';
-  document.getElementById('btn-baixar').style.display = 'flex';
-  setStatus('✅ Colagem pronta para download!');
 }
 
 function generateCollage() {
-  const imgs = loadedImages.filter(Boolean);
-  if (imgs.length < 1) { setStatus('⚠️ Adicione pelo menos 1 foto.'); return; }
+  const imgs = loadedImgs.filter(Boolean);
+  if (!imgs.length) return setStatus('⚠️ Adicione fotos primeiro');
 
   const layout = document.getElementById('layout-select').value;
   const gap = parseInt(document.getElementById('gap-select').value);
-  const aspect = parseFloat(document.getElementById('aspect-select').value);
   const bgColor = document.getElementById('bg-color').value;
-  const textColor = document.getElementById('text-color').value;
   const phrase = document.getElementById('footer-text').value;
+  const loc = document.getElementById('loc-input').value;
   
-  const canvas = document.getElementById('collage-canvas');
+  const canvas = document.getElementById('main-canvas');
   const ctx = canvas.getContext('2d');
   const W = 1200;
-  const n = imgs.length;
-
-  if (layout === 'featured' && n > 1) {
-    const mainH = Math.round(W * 0.65);
-    const smCount = Math.min(n - 1, 4);
-    const smW = Math.floor((W - gap * (smCount - 1)) / smCount);
-    const smH = Math.round(smW * aspect);
-    const photosH = mainH + gap + smH;
-    
-    buildCanvas(imgs, W, gap, photosH, canvas, ctx, bgColor, textColor, phrase, (offsetY) => {
-      drawCover(ctx, imgs[0], 0, offsetY, W, mainH);
-      for (let i = 0; i < smCount; i++) {
-        if (!imgs[i + 1]) break;
-        drawCover(ctx, imgs[i + 1], i * (smW + gap), offsetY + mainH + gap, smW, smH);
-      }
-    });
-    return;
-  }
-
+  const pad = W * 0.05;
+  
   let cols, rows;
-  if (layout === '1col') { cols = 1; rows = n; }
-  else if (layout === '2col') { cols = 2; rows = Math.ceil(n / 2); }
-  else if (layout === '3col') { cols = 3; rows = Math.ceil(n / 3); }
-  else if (layout === 'grid22') { cols = 2; rows = 2; }
+  if (layout === '2col') { cols = 2; rows = Math.ceil(imgs.length / 2); }
+  else if (layout === '3col') { cols = 3; rows = Math.ceil(imgs.length / 3); }
   else {
-    // Auto
-    if (n === 1) { cols = 1; rows = 1; }
-    else if (n <= 2) { cols = 2; rows = 1; }
-    else if (n === 3) { cols = 3; rows = 1; }
-    else if (n === 4) { cols = 2; rows = 2; }
-    else if (n <= 6) { cols = 3; rows = 2; }
-    else { cols = 3; rows = Math.ceil(n / 3); }
+    if (imgs.length <= 2) { cols = 2; rows = 1; }
+    else if (imgs.length <= 4) { cols = 2; rows = 2; }
+    else { cols = 3; rows = Math.ceil(imgs.length / 3); }
   }
 
-  const cellW = Math.floor((W - gap * (cols - 1)) / cols);
-  const cellH = Math.round(cellW * aspect);
-  const photosH = cellH * rows + gap * (rows - 1);
+  const cabH = 140; // Aumentado para acomodar a logo superior
+  const rodH = 140;
+  let phtH = 0;
+  
+  if (layout === 'featured' && imgs.length > 1) {
+    phtH = Math.round(W * 0.65) + gap + Math.round((W/3) * 0.75);
+  } else {
+    const cW = (W - gap * (cols - 1)) / cols;
+    phtH = (cW * 0.75) * rows + gap * (rows - 1);
+  }
 
-  buildCanvas(imgs, W, gap, photosH, canvas, ctx, bgColor, textColor, phrase, (offsetY) => {
-    imgs.slice(0, cols * rows).forEach((img, i) => {
+  canvas.width = W;
+  canvas.height = cabH + phtH + rodH;
+
+  // Background
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, W, canvas.height);
+
+  // Faixa de Charme Topo
+  const grad = ctx.createLinearGradient(0, 0, W, 0);
+  grad.addColorStop(0, '#b8001f');
+  grad.addColorStop(0.5, '#e63946');
+  grad.addColorStop(1, '#1c1e21');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, 12);
+
+  // --- LOGO SUPERIOR ESQUERDA ---
+  if (logo) {
+    const lH = cabH * 0.4;
+    const lW = logo.naturalWidth * (lH / logo.naturalHeight);
+    ctx.drawImage(logo, pad, 35, lW, lH);
+    
+    // Data e Localização (Abaixo da logo superior)
+    ctx.fillStyle = '#1c1e21';
+    ctx.textAlign = 'left';
+    ctx.font = 'bold 22px sans-serif';
+    ctx.fillText(new Date().toLocaleDateString('pt-BR'), pad, 35 + lH + 25);
+    
+    if (loc) {
+      ctx.font = '600 20px sans-serif';
+      ctx.fillStyle = '#b8001f';
+      ctx.fillText('📍 ' + loc.toUpperCase(), pad, 35 + lH + 55);
+    }
+  }
+
+  // Fotos
+  const offY = cabH;
+  if (layout === 'featured' && imgs.length > 1) {
+    drawCover(ctx, imgs[0], 0, offY, W, Math.round(W * 0.65));
+    const sW = (W - gap * 2) / 3;
+    const sH = sW * 0.75;
+    for (let i = 0; i < 3; i++) {
+        if (imgs[i+1]) drawCover(ctx, imgs[i+1], i * (sW + gap), offY + Math.round(W * 0.65) + gap, sW, sH);
+    }
+  } else {
+    const cW = (W - gap * (cols - 1)) / cols;
+    const cH = cW * 0.75;
+    imgs.forEach((img, i) => {
       const col = i % cols;
       const row = Math.floor(i / cols);
-      drawCover(ctx, img, col * (cellW + gap), offsetY + row * (cellH + gap), cellW, cellH);
+      drawCover(ctx, img, col * (cW + gap), offY + row * (cH + gap), cW, cH);
     });
-  });
+  }
+
+  // Rodapé
+  const rodY = cabH + phtH;
+  ctx.fillStyle = '#1c1e21';
+  ctx.fillRect(0, rodY, W, rodH);
+  
+  ctx.fillStyle = '#b8001f';
+  ctx.fillRect(0, rodY, W, 4);
+
+  // Frase Central
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.font = 'bold 36px sans-serif';
+  ctx.fillText(phrase, W / 2, rodY + rodH / 2);
+
+  // --- LOGO INFERIOR DIREITA ---
+  if (logo) {
+    const lH = rodH * 0.55;
+    const lW = logo.naturalWidth * (lH / logo.naturalHeight);
+    ctx.drawImage(logo, W - lW - pad, rodY + (rodH - lH) / 2, lW, lH);
+  }
+
+  document.getElementById('canvas-wrap').style.display = 'block';
+  document.getElementById('btn-baixar').style.display = 'flex';
+  setStatus('✅ Postagem com Logo Dupla gerada!');
 }
 
 function drawCover(ctx, img, x, y, w, h) {
-  const scale = Math.max(w / img.naturalWidth, h / img.naturalHeight);
-  const sw = w / scale, sh = h / scale;
+  const s = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+  const sw = w / s, sh = h / s;
   const sx = (img.naturalWidth - sw) / 2, sy = (img.naturalHeight - sh) / 2;
   ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
 }
 
 function downloadCollage() {
-  const canvas = document.getElementById('collage-canvas');
+  const c = document.getElementById('main-canvas');
   const a = document.createElement('a');
-  const now = new Date();
-  const ts = now.getTime();
-  a.download = 'CGB_Colagem_' + ts + '.jpg';
-  canvas.toBlob(blob => { a.href = URL.createObjectURL(blob); a.click(); }, 'image/jpeg', 0.95);
+  a.download = 'CGB_Post_LogoDupla.jpg';
+  c.toBlob(b => { a.href = URL.createObjectURL(b); a.click(); }, 'image/jpeg', 0.95);
 }
 
 function limpar() {
-  imageFiles = []; loadedImages = [];
+  images = []; loadedImgs = [];
   document.getElementById('preview-strip').innerHTML = '';
-  document.getElementById('canvas-container').style.display = 'none';
+  document.getElementById('canvas-wrap').style.display = 'none';
   document.getElementById('btn-baixar').style.display = 'none';
-  document.getElementById('file-input').value = '';
   setStatus('');
 }
 
-function setStatus(msg) { document.getElementById('status').textContent = msg; }
+function setStatus(m) { document.getElementById('status').textContent = m; }
 </script>
 </body>
 </html>
