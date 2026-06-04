@@ -1,3 +1,6 @@
+
+raw
+Cgb post v7 · HTML
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -276,7 +279,7 @@ function generateCollage() {
     else                       { cols = 3; rows = Math.ceil(imgs.length/3); }
   }
  
-  const cabH = 175;
+  const cabH = 160;
   const rodH = 140;
   let phtH = 0;
  
@@ -302,72 +305,76 @@ function generateCollage() {
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, W, 12);
  
-  // ── CABEÇALHO: LOGO ESQUERDA + CAMPOS À DIREITA ──
+  // ── CABEÇALHO ──
   if (logo) {
-    const lH = cabH * 0.38;
-    const lW = logo.naturalWidth * (lH / logo.naturalHeight);
-    const lY = 14;
+    const p    = 14;                               // padding geral
+    const lH   = cabH - p * 2;                    // logo ocupa quase todo o cabH
+    const lW   = logo.naturalWidth * (lH / logo.naturalHeight);
  
-    // Logo
-    ctx.drawImage(logo, pad, lY, lW, lH);
+    // Logo grande à esquerda, centralizada verticalmente
+    ctx.drawImage(logo, p, p, lW, lH);
  
-    // Data e hora abaixo da logo
-    ctx.fillStyle = textColor;
+    // Data + localização coladas abaixo da logo
+    const infoX = p;
+    const infoY = p + lH + 2;                     // logo bottom + 2px
     ctx.textAlign = 'left';
-    ctx.font = 'bold 18px sans-serif';
+    ctx.font = '600 13px sans-serif';
+    ctx.fillStyle = textColor;
     const now = new Date();
-    const dataStr = now.toLocaleDateString('pt-BR') + ' | ' + now.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
-    ctx.fillText(dataStr, pad, lY + lH + 20);
- 
-    // Localização abaixo da data
+    ctx.fillText(now.toLocaleDateString('pt-BR') + ' | ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}), infoX, infoY + 13);
     if (loc) {
-      ctx.font = '600 16px sans-serif';
+      ctx.font = '600 12px sans-serif';
       ctx.fillStyle = accentColor;
-      ctx.fillText('📍 ' + loc.toUpperCase(), pad, lY + lH + 40);
+      ctx.fillText('📍 ' + loc.toUpperCase(), infoX, infoY + 27);
     }
  
-    // Linha divisória vertical
-    const divX = pad + lW + 22;
-    ctx.fillStyle = '#cbd5e0';
-    ctx.fillRect(divX - 1, 12, 2, cabH - 20);
+    // Divisória vertical
+    const divX = p + lW + 14;
+    ctx.fillStyle = '#d1d5db';
+    ctx.fillRect(divX, p, 1, cabH - p * 2);
  
-    // ── CAMPOS À DIREITA DA LOGO ──
-    const fieldsAreaX = divX + 16;
-    const fieldsAreaW = W - fieldsAreaX - pad;
-    const numCols = 4;
-    const colW = fieldsAreaW / numCols;
+    // ── 8 campos: 4 colunas × 2 linhas bem compactas ──
+    const gx   = divX + 12;
+    const gw   = W - gx - p;
+    const cols = 4;
+    const cw   = Math.floor(gw / cols);
+ 
+    // Duas linhas verticalmente centradas no cabeçalho
+    const lineH  = 44;                            // altura de cada bloco label+valor
+    const totalH = lineH * 2 + 8;                 // 2 linhas + gap
+    const startY = (cabH - totalH) / 2;           // centrado no cabH
+ 
     const fields = [
-      { label: 'GESTOR',           value: gestor    },
-      { label: 'BASE',             value: base      },
-      { label: 'COORDENADOR',      value: coord     },
-      { label: 'SUPERVISOR',       value: superv    },
-      { label: 'TEC / FISCAL',     value: tecfiscal },
-      { label: 'EQUIPE',           value: equipe    },
-      { label: 'OBRA',             value: obra      },
-      { label: 'AÇÕES REALIZADAS', value: acoes     },
+      { label: 'GESTOR',            value: gestor    },
+      { label: 'BASE',              value: base      },
+      { label: 'COORDENADOR(A)',    value: coord     },
+      { label: 'SUPERVISOR(A)',     value: superv    },
+      { label: 'TEC / FISCAL',      value: tecfiscal },
+      { label: 'EQUIPE',            value: equipe    },
+      { label: 'OBRA',              value: obra      },
+      { label: 'AÇÕES REALIZADAS',  value: acoes     },
     ];
  
-    const rowH = (cabH - 24) / 2;
     ctx.textAlign = 'left';
     fields.forEach((f, i) => {
-      const col = i % numCols;
-      const row = Math.floor(i / numCols);
-      const fx = fieldsAreaX + col * colW;
-      const fy = 14 + row * rowH;
+      const col  = i % cols;
+      const row  = Math.floor(i / cols);
+      const fx   = gx + col * cw;
+      const fy   = startY + row * (lineH + 8);
  
-      // Label
-      ctx.font = 'bold 11px sans-serif';
+      // Label vermelho compacto
+      ctx.font      = '700 10px sans-serif';
       ctx.fillStyle = accentColor;
-      ctx.fillText(f.label, fx, fy + 12);
+      ctx.fillText(f.label, fx, fy + 10);
  
-      // Linha separadora
-      ctx.fillStyle = '#cbd5e0';
-      ctx.fillRect(fx, fy + 15, colW - 12, 1);
+      // Linha fina
+      ctx.fillStyle = '#e5e7eb';
+      ctx.fillRect(fx, fy + 13, cw - 8, 1);
  
-      // Value
-      ctx.font = f.value ? '600 17px sans-serif' : '400 17px sans-serif';
-      ctx.fillStyle = f.value ? textColor : '#94a3b8';
-      ctx.fillText(f.value || '—', fx, fy + 34);
+      // Valor
+      ctx.font      = '700 16px sans-serif';
+      ctx.fillStyle = f.value ? textColor : '#9ca3af';
+      ctx.fillText(f.value || '—', fx, fy + 30);
     });
   }
  
