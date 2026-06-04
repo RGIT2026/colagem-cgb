@@ -276,7 +276,7 @@ function generateCollage() {
     else                       { cols = 3; rows = Math.ceil(imgs.length/3); }
   }
  
-  const cabH = 280;
+  const cabH = 175;
   const rodH = 140;
   let phtH = 0;
  
@@ -304,9 +304,9 @@ function generateCollage() {
  
   // ── CABEÇALHO: LOGO ESQUERDA + CAMPOS À DIREITA ──
   if (logo) {
-    const lH = cabH * 0.32;
+    const lH = cabH * 0.38;
     const lW = logo.naturalWidth * (lH / logo.naturalHeight);
-    const lY = 18;
+    const lY = 14;
  
     // Logo
     ctx.drawImage(logo, pad, lY, lW, lH);
@@ -314,61 +314,60 @@ function generateCollage() {
     // Data e hora abaixo da logo
     ctx.fillStyle = textColor;
     ctx.textAlign = 'left';
-    ctx.font = 'bold 22px sans-serif';
+    ctx.font = 'bold 18px sans-serif';
     const now = new Date();
     const dataStr = now.toLocaleDateString('pt-BR') + ' | ' + now.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
-    ctx.fillText(dataStr, pad, lY + lH + 26);
+    ctx.fillText(dataStr, pad, lY + lH + 20);
  
     // Localização abaixo da data
     if (loc) {
-      ctx.font = '600 20px sans-serif';
+      ctx.font = '600 16px sans-serif';
       ctx.fillStyle = accentColor;
-      ctx.fillText('📍 ' + loc.toUpperCase(), pad, lY + lH + 52);
+      ctx.fillText('📍 ' + loc.toUpperCase(), pad, lY + lH + 40);
     }
  
-    // Linha divisória vertical separando logo/info dos campos
-    const divX = pad + lW + 30;
-    ctx.fillStyle = '#e2e8f0';
-    ctx.fillRect(divX - 1, 16, 2, cabH - 28);
+    // Linha divisória vertical
+    const divX = pad + lW + 22;
+    ctx.fillStyle = '#cbd5e0';
+    ctx.fillRect(divX - 1, 12, 2, cabH - 20);
  
     // ── CAMPOS À DIREITA DA LOGO ──
-    // 4 campos por linha, 2 linhas = 8 campos
-    const fieldsAreaX = divX + 20;
+    const fieldsAreaX = divX + 16;
     const fieldsAreaW = W - fieldsAreaX - pad;
     const numCols = 4;
     const colW = fieldsAreaW / numCols;
     const fields = [
-      { label: 'GESTOR',            value: gestor   },
-      { label: 'BASE',              value: base     },
-      { label: 'COORDENADOR',       value: coord    },
-      { label: 'SUPERVISOR',        value: superv   },
-      { label: 'TEC / FISCAL',      value: tecfiscal},
-      { label: 'EQUIPE',            value: equipe   },
-      { label: 'OBRA',              value: obra     },
-      { label: 'AÇÕES REALIZADAS',  value: acoes    },
+      { label: 'GESTOR',           value: gestor    },
+      { label: 'BASE',             value: base      },
+      { label: 'COORDENADOR',      value: coord     },
+      { label: 'SUPERVISOR',       value: superv    },
+      { label: 'TEC / FISCAL',     value: tecfiscal },
+      { label: 'EQUIPE',           value: equipe    },
+      { label: 'OBRA',             value: obra      },
+      { label: 'AÇÕES REALIZADAS', value: acoes     },
     ];
  
-    const rowH = (cabH - 28) / 2;
+    const rowH = (cabH - 24) / 2;
     ctx.textAlign = 'left';
     fields.forEach((f, i) => {
       const col = i % numCols;
       const row = Math.floor(i / numCols);
       const fx = fieldsAreaX + col * colW;
-      const fy = 18 + row * rowH + 10;
+      const fy = 14 + row * rowH;
  
       // Label
-      ctx.font = 'bold 13px sans-serif';
+      ctx.font = 'bold 11px sans-serif';
       ctx.fillStyle = accentColor;
-      ctx.fillText(f.label, fx, fy + 14);
+      ctx.fillText(f.label, fx, fy + 12);
  
       // Linha separadora
       ctx.fillStyle = '#cbd5e0';
-      ctx.fillRect(fx, fy + 18, colW - 16, 1);
+      ctx.fillRect(fx, fy + 15, colW - 12, 1);
  
-      // Value (ou traço se vazio)
-      ctx.font = f.value ? '600 19px sans-serif' : '400 19px sans-serif';
+      // Value
+      ctx.font = f.value ? '600 17px sans-serif' : '400 17px sans-serif';
       ctx.fillStyle = f.value ? textColor : '#94a3b8';
-      ctx.fillText(f.value || '—', fx, fy + 40);
+      ctx.fillText(f.value || '—', fx, fy + 34);
     });
   }
  
