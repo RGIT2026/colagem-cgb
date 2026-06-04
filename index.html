@@ -3,61 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colagem CGB - Personalizada</title>
+<title>Colagem CGB - Versão 2.0</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; color: #333; min-height: 100vh; padding: 20px; }
   
-  .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+  .container { max-width: 850px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
   
   header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
-  header img { height: 50px; }
-  header h1 { font-size: 1.5rem; color: #b8001f; }
+  header img { height: 45px; }
+  header h1 { font-size: 1.4rem; color: #b8001f; }
 
   #drop-zone {
-    border: 2px dashed #cbd5e0; border-radius: 12px; padding: 40px 20px;
+    border: 2px dashed #cbd5e0; border-radius: 12px; padding: 35px 20px;
     text-align: center; cursor: pointer; margin-bottom: 20px;
     background: #fafafa; transition: all 0.3s ease;
   }
   #drop-zone:hover { background: #f0f4f8; border-color: #b8001f; }
-  #drop-zone .icon { font-size: 48px; margin-bottom: 10px; }
+  #drop-zone .icon { font-size: 40px; margin-bottom: 10px; }
   #drop-zone p { color: #4a5568; font-weight: 600; }
   #drop-zone small { color: #a0aec0; }
 
-  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 10px; }
+  .controls-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 10px; }
   .grupo { display: flex; flex-direction: column; gap: 5px; }
-  .grupo label { font-size: 13px; font-weight: bold; color: #555; }
+  .grupo label { font-size: 12px; font-weight: bold; color: #555; text-transform: uppercase; }
   select, input[type="text"], input[type="color"] {
-    font-size: 14px; padding: 8px; border-radius: 6px;
-    border: 1px solid #ddd; background: #fff; width: 100%;
+    font-size: 14px; padding: 10px; border-radius: 6px;
+    border: 1px solid #ddd; background: #fff; width: 100%; outline: none;
   }
-  input[type="color"] { height: 38px; padding: 2px; cursor: pointer; }
+  select:focus, input:focus { border-color: #b8001f; }
+  input[type="color"] { height: 40px; padding: 2px; cursor: pointer; }
 
   .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-  .btn { flex: 1; min-width: 120px; padding: 12px; font-size: 14px; font-weight: 700; border-radius: 8px; border: none; cursor: pointer; transition: transform 0.1s, background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn:active { transform: scale(0.98); }
+  .btn { flex: 1; min-width: 140px; padding: 14px; font-size: 14px; font-weight: 700; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn:active { transform: translateY(1px); }
   
-  .btn-gerar { background: #b8001f; color: #fff; }
-  .btn-gerar:hover { background: #90001a; }
-  .btn-baixar { background: #2d3748; color: #fff; display: none; }
-  .btn-baixar:hover { background: #1a202c; }
-  .btn-limpar { background: #edf2f7; color: #4a5568; }
+  .btn-gerar { background: #b8001f; color: #fff; box-shadow: 0 4px 0 #800015; }
+  .btn-gerar:hover { background: #d30024; }
+  .btn-baixar { background: #2d3748; color: #fff; display: none; box-shadow: 0 4px 0 #1a202c; }
+  .btn-baixar:hover { background: #3e4c5f; }
+  .btn-limpar { background: #edf2f7; color: #4a5568; border: 1px solid #cbd5e0; }
   .btn-limpar:hover { background: #e2e8f0; }
 
-  #preview-strip { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-  .thumb-wrap { position: relative; }
-  .thumb-wrap img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 2px solid #eee; }
+  #preview-strip { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; padding: 10px; background: #fdfdfd; border-radius: 8px; border: 1px solid #eee; min-height: 50px; }
+  .thumb-wrap { position: relative; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+  .thumb-wrap img { width: 85px; height: 85px; object-fit: cover; border-radius: 8px; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
   .remover {
-    position: absolute; top: -5px; right: -5px; width: 22px; height: 22px;
-    background: #ff4444; border: none; border-radius: 50%;
-    color: #fff; font-size: 12px; cursor: pointer; font-weight: bold;
+    position: absolute; top: -8px; right: -8px; width: 24px; height: 24px;
+    background: #e53e3e; border: 2px solid #fff; border-radius: 50%;
+    color: #fff; font-size: 11px; cursor: pointer; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   }
 
-  .canvas-container { width: 100%; overflow-x: auto; margin-top: 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: none; }
+  .canvas-container { width: 100%; overflow-x: auto; margin-top: 15px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); display: none; background: #eee; }
   canvas { display: block; max-width: 100%; height: auto; margin: 0 auto; }
   
-  #status { font-size: 14px; color: #666; text-align: center; margin-top: 10px; font-weight: 500; }
+  #status { font-size: 14px; color: #4a5568; text-align: center; margin-top: 15px; font-weight: 600; min-height: 20px; }
 </style>
 </head>
 <body>
@@ -65,43 +68,44 @@
 <div class="container">
   <header>
     <img id="ui-logo" src="" alt="CGB Logo">
-    <h1>Gerador de Colagem</h1>
+    <h1>Colagem CGB <small style="font-size: 0.8rem; color: #888;">v2.0</small></h1>
   </header>
 
   <div id="drop-zone" onclick="document.getElementById('file-input').click()">
-    <div class="icon">📸</div>
-    <p>Clique ou arraste fotos aqui</p>
-    <small>Suporta até 12 imagens</small>
+    <div class="icon">🖼️</div>
+    <p>Clique aqui para selecionar as fotos</p>
+    <small>Até 12 imagens • Formatos JPG, PNG</small>
   </div>
   <input type="file" id="file-input" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
 
-  <div class="controls">
+  <div id="preview-strip"></div>
+
+  <div class="controls-grid">
     <div class="grupo">
-      <label>Layout</label>
+      <label>Estilo de Layout</label>
       <select id="layout-select">
         <option value="auto">Automático</option>
-        <option value="1col">1 Coluna (Lista)</option>
-        <option value="2col">2 Colunas</option>
-        <option value="3col">3 Colunas</option>
-        <option value="grid22">Grade 2x2</option>
-        <option value="featured">Destaque + Grade</option>
+        <option value="1col">Lista (1 Coluna)</option>
+        <option value="2col">Lado a Lado (2 Col.)</option>
+        <option value="3col">Grade (3 Colunas)</option>
+        <option value="featured">Destaque Superior</option>
       </select>
     </div>
     <div class="grupo">
-      <label>Espaçamento (px)</label>
+      <label>Espaço entre Fotos</label>
       <select id="gap-select">
-        <option value="0">Sem espaço</option>
-        <option value="5" selected>Pequeno (5px)</option>
-        <option value="15">Médio (15px)</option>
-        <option value="30">Grande (30px)</option>
+        <option value="0">Sem bordas</option>
+        <option value="8" selected>Fino (8px)</option>
+        <option value="20">Médio (20px)</option>
+        <option value="40">Largo (40px)</option>
       </select>
     </div>
     <div class="grupo">
-      <label>Proporção</label>
+      <label>Formato da Foto</label>
       <select id="aspect-select">
-        <option value="0.75" selected>4:3 (Padrão)</option>
+        <option value="0.75" selected>4:3 (Retangular)</option>
         <option value="1">1:1 (Quadrado)</option>
-        <option value="0.5625">16:9 (Widescreen)</option>
+        <option value="0.5625">16:9 (Cinema)</option>
         <option value="1.33">3:4 (Retrato)</option>
       </select>
     </div>
@@ -111,24 +115,22 @@
     </div>
   </div>
 
-  <div class="controls">
+  <div class="controls-grid">
     <div class="grupo" style="grid-column: span 2;">
-      <label>Frase do Rodapé</label>
-      <input type="text" id="footer-text" value="SEGURANÇA ATIVA NOSSO DNA 🧬">
+      <label>Mensagem de Rodapé</label>
+      <input type="text" id="footer-text" placeholder="Digite sua frase aqui..." value="SEGURANÇA ATIVA NOSSO DNA 🧬">
     </div>
     <div class="grupo">
       <label>Cor do Texto</label>
-      <input type="color" id="text-color" value="#222222">
+      <input type="color" id="text-color" value="#1a202c">
     </div>
   </div>
 
   <div class="actions">
-    <button class="btn btn-gerar" onclick="generateCollage()">⚡ Gerar Colagem</button>
-    <button class="btn btn-baixar" id="btn-baixar" onclick="downloadCollage()">⬇️ Baixar Imagem</button>
-    <button class="btn btn-limpar" onclick="limpar()">🗑️ Limpar Tudo</button>
+    <button class="btn btn-gerar" onclick="generateCollage()">⚡ GERAR COLAGEM</button>
+    <button class="btn btn-baixar" id="btn-baixar" onclick="downloadCollage()">⬇️ BAIXAR IMAGEM</button>
+    <button class="btn btn-limpar" onclick="limpar()">🗑️ LIMPAR</button>
   </div>
-
-  <div id="preview-strip"></div>
   
   <div class="canvas-container" id="canvas-container">
     <canvas id="collage-canvas"></canvas>
@@ -138,7 +140,8 @@
 </div>
 
 <script>
-const LOGO_SRC = "data:image/png;base64,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";
+// NOVA LOGO EM BASE64
+const LOGO_SRC = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAB2ASwDASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAAAAIDBAUBBv/EABkBAQEBAQEBAAAAAAAAAAAAAAREAQIDBUv/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUG/9oADAMBAAIRAxEAPwD58AvmRvSoxrao6CwAAAAAAAAAAAAAAAAA1TUbLoTrgIU3+2YV1N5AsPdRk96HpzXSqMSUQAlXnP86Q5rdlKwGm4wN4wN8TEtqNWiUc/QHjUY0eue8T0Z9C5w++adcd0yDLnOkyayGDpYqq3Ua4FBe5thu89HPjpzVttjKCnGdJj2Dn9DCdKMj6dWTRhcoXmvvw7c9NkZwe+Doc/pa+ehOmMYpdSLq4jbbGUec/bhonuOe6A53t9RvEV06hVaEefpzV1oPM/SZ9BnmtS8iwnRJHxrF0edt1wW1W+Rzl6o3WyijNu59b50XxDB0spDVl0lgMaF1aRGGvR5UtNdkOd0eeWa+dc99jyE6nniecnhWVDXMnBfLo+8/RGhWLPKc5KoqW/nSOgonFiqg2Mwza8mitTOjQzjQz1l2MoCzRjsnroGehmQ1zBfMAAAAAAAAAAAAAAACzwm4C4AAAAAAAAAAAAAAA//2Q==";
 
 let imageFiles = [];
 let loadedImages = [];
@@ -153,7 +156,10 @@ logoLoader.src = LOGO_SRC;
 
 function handleFiles(files) {
   const arr = Array.from(files).filter(f => f.type.startsWith('image/'));
-  imageFiles = [...imageFiles, ...arr].slice(0, 12); // Aumentado para 12
+  if (imageFiles.length + arr.length > 12) {
+    setStatus('⚠️ Máximo de 12 imagens permitido.');
+  }
+  imageFiles = [...imageFiles, ...arr].slice(0, 12);
   loadImages();
 }
 
@@ -161,7 +167,7 @@ function loadImages() {
   loadedImages = [];
   document.getElementById('preview-strip').innerHTML = '';
   if (!imageFiles.length) return;
-  setStatus('⏳ Carregando imagens...');
+  setStatus('⏳ Carregando fotos...');
   let loaded = 0;
   imageFiles.forEach((file, i) => {
     const img = new Image();
@@ -170,7 +176,7 @@ function loadImages() {
       loaded++;
       if (loaded === imageFiles.length) {
         renderPreviews();
-        setStatus('✨ ' + imageFiles.length + ' imagens prontas.');
+        setStatus('✨ ' + imageFiles.length + ' fotos prontas. Clique em Gerar!');
       }
     };
     img.src = URL.createObjectURL(file);
@@ -203,32 +209,24 @@ function getDateTime() {
   const now = new Date();
   const data = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
   const hora = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-  return data + ' às ' + hora;
+  return data + ' ' + hora;
 }
 
 function drawHeader(ctx, W, cabH, bgColor, textColor) {
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, W, cabH);
 
-  const padding = W * 0.03;
-  const logoH = cabH * 0.5;
-  const logoW = logoImg ? logoImg.naturalWidth * (logoH / logoImg.naturalHeight) : 0;
-  
-  // LOGO NO CANTO SUPERIOR ESQUERDO
-  if (logoImg) {
-    ctx.drawImage(logoImg, padding, (cabH - logoH) / 2, logoW, logoH);
-  }
-
-  const dateFontSize = Math.round(W * 0.018);
-  ctx.font = dateFontSize + 'px sans-serif';
+  const padding = W * 0.04;
+  const dateFontSize = Math.round(W * 0.02);
+  ctx.font = '500 ' + dateFontSize + 'px sans-serif';
   ctx.fillStyle = textColor;
-  ctx.globalAlpha = 0.6;
-  ctx.textAlign = 'right';
+  ctx.globalAlpha = 0.5;
+  ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
-  ctx.fillText(getDateTime(), W - padding, cabH / 2);
+  ctx.fillText(getDateTime(), padding, cabH / 2);
   ctx.globalAlpha = 1.0;
 
-  ctx.strokeStyle = '#e0e0e0';
+  ctx.strokeStyle = '#e2e8f0';
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(0, cabH - 1);
@@ -240,24 +238,36 @@ function drawFooter(ctx, W, rodapeH, rodapeY, bgColor, textColor, phrase) {
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, rodapeY, W, rodapeH);
 
-  ctx.strokeStyle = '#e0e0e0';
+  ctx.strokeStyle = '#e2e8f0';
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(0, rodapeY + 1);
   ctx.lineTo(W, rodapeY + 1);
   ctx.stroke();
 
-  const fontSize = Math.round(W * 0.025);
+  const padding = W * 0.04;
+  
+  // FRASE CENTRALIZADA (OU LEVEMENTE PARA A ESQUERDA)
+  const fontSize = Math.round(W * 0.028);
   ctx.font = 'bold ' + fontSize + 'px sans-serif';
   ctx.fillStyle = textColor;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(phrase, W / 2, rodapeY + rodapeH / 2);
+
+  // LOGO NO CANTO DIREITO INFERIOR
+  if (logoImg) {
+    const logoH = rodapeH * 0.6;
+    const logoW = logoImg.naturalWidth * (logoH / logoImg.naturalHeight);
+    const logoX = W - logoW - padding;
+    const logoY = rodapeY + (rodapeH - logoH) / 2;
+    ctx.drawImage(logoImg, logoX, logoY, logoW, logoH);
+  }
 }
 
 function buildCanvas(imgs, W, gap, photosH, canvas, ctx, bgColor, textColor, phrase, drawPhotos) {
-  const cabH = 100;
-  const rodapeH = 70;
+  const cabH = 80;
+  const rodapeH = 90;
   const H = cabH + photosH + rodapeH;
 
   canvas.width = W;
@@ -272,12 +282,12 @@ function buildCanvas(imgs, W, gap, photosH, canvas, ctx, bgColor, textColor, phr
   
   document.getElementById('canvas-container').style.display = 'block';
   document.getElementById('btn-baixar').style.display = 'flex';
-  setStatus('✅ Colagem gerada com sucesso!');
+  setStatus('✅ Colagem pronta para download!');
 }
 
 function generateCollage() {
   const imgs = loadedImages.filter(Boolean);
-  if (imgs.length < 1) { setStatus('⚠️ Adicione pelo menos 1 imagem.'); return; }
+  if (imgs.length < 1) { setStatus('⚠️ Adicione pelo menos 1 foto.'); return; }
 
   const layout = document.getElementById('layout-select').value;
   const gap = parseInt(document.getElementById('gap-select').value);
@@ -292,7 +302,7 @@ function generateCollage() {
   const n = imgs.length;
 
   if (layout === 'featured' && n > 1) {
-    const mainH = Math.round(W * 0.6);
+    const mainH = Math.round(W * 0.65);
     const smCount = Math.min(n - 1, 4);
     const smW = Math.floor((W - gap * (smCount - 1)) / smCount);
     const smH = Math.round(smW * aspect);
@@ -347,8 +357,8 @@ function downloadCollage() {
   const canvas = document.getElementById('collage-canvas');
   const a = document.createElement('a');
   const now = new Date();
-  const timestamp = now.getFullYear() + '' + (now.getMonth()+1) + '' + now.getDate() + '_' + now.getHours() + '' + now.getMinutes();
-  a.download = 'colagem_cgb_' + timestamp + '.jpg';
+  const ts = now.getTime();
+  a.download = 'CGB_Colagem_' + ts + '.jpg';
   canvas.toBlob(blob => { a.href = URL.createObjectURL(blob); a.click(); }, 'image/jpeg', 0.95);
 }
 
