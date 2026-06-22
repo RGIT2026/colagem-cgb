@@ -1,13 +1,3 @@
-Aqui está o seu código ajustado e otimizado.
-
-🛠️ O que foi corrigido e melhorado:
-Rodapé Corrigido e Centralizado: O texto do rodapé agora fica perfeitamente centralizado no meio do canvas e possui uma proteção para o tamanho da fonte (baseFontSize). Se a frase for muito grande, ela diminui automaticamente para não bater ou passar por cima do logotipo da CGB no lado direito.
-
-Correção de Legendas: No código anterior, a renderização das imagens nos layouts calculava o espaço do texto (textSpace), mas não adicionava a quebra correta para layouts dinâmicos como o mosaic ou featured-double em algumas situações. Foi ajustado a matemática de altura (canvas.height) para garantir que nenhuma legenda seja cortada na imagem final.
-
-Substitua todo o conteúdo do seu arquivo por este:
-
-HTML
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -47,8 +37,8 @@ HTML
   .thumb input { width: 80px; font-size: 10px; padding: 4px; border: 1px solid #cbd5e0; border-radius: 4px; outline: none; text-align: center; }
   .thumb input:focus { border-color: var(--cgb-red); }
   .del { position: absolute; top: -5px; right: -5px; width: 20px; height: 20px; background: #ef4444; color: #fff; border-radius: 50%; border: none; cursor: pointer; font-weight: bold; font-size: 10px; z-index: 10; }
-  .canvas-wrap { width: 100%; overflow-x: auto; margin-top: 15px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); display: none; }
-  canvas { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+  .canvas-wrap { width: 100%; overflow: hidden; margin-top: 15px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); display: none; background: #fff; padding: 5px; }
+  canvas { display: block; width: 100% !important; height: auto !important; }
   #status { font-size: 13px; color: #64748b; text-align: center; margin-top: 10px; font-weight: 700; }
   .panel-title { font-size: 11px; font-weight: 800; color: var(--cgb-red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
   .qty-selector { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
@@ -62,7 +52,7 @@ HTML
 <div class="container">
   <div class="top-accent"></div>
   <header>
-    <img id="ui-logo" src="data:image/png;base64,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">
+    <img id="ui-logo" src="data:image/png;base64,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";
     <h1>CGB POST <small style="font-size: 0.7rem; color: #94a3b8;">v7.0</small></h1>
   </header>
   <div class="main-content">
@@ -131,7 +121,7 @@ HTML
       </div>
       <div class="field" style="margin-top: 12px; position: relative;">
         <label>Frase do Rodapé</label>
-        <input type="text" id="footer-text" value="SEGURANÇA ATIVA NOSSO DNA 🧬">
+        <input type="text" id="footer-text" value="SINALIZAÇÃO E SEGURANÇA EM OPERAÇÃO DE REDE ⚡">
         <button class="btn-ia" style="top: -5px;" onclick="suggestPhrase()">💡 Sugerir Frase</button>
       </div>
     </div>
@@ -152,15 +142,16 @@ const LOGO_B64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAB2CAYAAABy
 
 let images = [], loadedImgs = [], captions = [], logo = null, maxPhotos = 12;
 
+// ——— FRASES MELHORADAS PARA O CONTEXTO OPERACIONAL DE CAMPO ———
 const CGB_PHRASES = [
-  "SEGURANÇA ATIVA NOSSO DNA 🧬",
-  "QUALIDADE E COMPROMISSO EM CADA OBRA 🏗️",
-  "INFRAESTRUTURA QUE CONSTRÓI O FUTURO 🚀",
-  "FOCO NA SEGURANÇA, EXCELÊNCIA NA ENTREGA ✅",
-  "CGB: TRANSFORMANDO PROJETOS EM REALIDADE 💎",
-  "NOSSA EQUIPE É NOSSA MAIOR FORÇA 💪",
-  "CONSTRUINDO COM ÉTICA E RESPONSABILIDADE 🤝",
-  "ZERO ACIDENTES: NOSSO MAIOR OBJETIVO 🛡️"
+  "SINALIZAÇÃO E SEGURANÇA EM OPERAÇÃO DE REDE ⚡",
+  "SEGURANÇA ATIVA: EQUIPE ALINHADA NO CAMPO 🛡️",
+  "MANUTENÇÃO E INFRAESTRUTURA COM FOCO EM ZERO ACIDENTES 🏗️",
+  "OPERAÇÕES COM MUNCK E VALORIZAÇÃO DA VIDA EM 1º LUGAR 🚛",
+  "PROCEDIMENTOS PADRONIZADOS E SINALIZAÇÃO ATIVA ✅",
+  "EXCELÊNCIA TÉCNICA E SEGURANÇA EM ALTURA O TEMPO TODO 🦺",
+  "COMPROMISSO INTERNO COM A QUALIDADE OPERACIONAL 💎",
+  "ZERO INCIDENTES: NOSSO MAIOR OBJETIVO DIÁRIO 💪"
 ];
 
 function suggestDesign() {
@@ -188,7 +179,7 @@ function suggestPhrase() {
     next = CGB_PHRASES[Math.floor(Math.random() * CGB_PHRASES.length)];
   } while (next === current);
   footerInput.value = next;
-  setStatus('💡 IA: Nova frase sugerida!');
+  setStatus('💡 IA: Nova frase operacional sugerida!');
 }
 
 function changeMaxPhotos(delta) {
@@ -485,24 +476,27 @@ function generateCollage() {
   ctx.fillStyle = '#b8001f';
   ctx.fillRect(0, rodY, W, 4);
   
-  // ——— RODAPÉ CORRIGIDO E CENTRALIZADO ———
+  // ——— CÁLCULO EXATO DE CENTRALIZAÇÃO DO RODAPÉ ———
   ctx.save();
-  ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  let baseFontSize = 36;
-  ctx.font = `bold ${baseFontSize}px sans-serif`;
   
   const logoWidthEstimate = logo ? 220 : 0;
-  const availableWidth = W - (pad * 2) - logoWidthEstimate;
+  // Área livre calculada desconsiderando o bloco do logo na direita
+  const areaLivreW = W - logoWidthEstimate - pad; 
+  const centroLivreX = areaLivreW / 2;
+
+  let baseFontSize = 34;
+  ctx.font = `bold ${baseFontSize}px sans-serif`;
   
-  let textWidth = ctx.measureText(phrase).width;
-  if (textWidth > availableWidth) {
-    baseFontSize = Math.floor(baseFontSize * (availableWidth / textWidth));
+  let textWidth = ctx.measureText(phrase.toUpperCase()).width;
+  if (textWidth > (areaLivreW - pad)) {
+    baseFontSize = Math.floor(baseFontSize * ((areaLivreW - pad) / textWidth));
     ctx.font = `bold ${baseFontSize}px sans-serif`;
   }
   
+  ctx.textAlign = 'center';
   ctx.fillStyle = '#ffffff';
-  ctx.fillText(phrase, W / 2, rodY + (rodH / 2) + 4);
+  ctx.fillText(phrase.toUpperCase(), centroLivreX, rodY + (rodH / 2) + 4);
   ctx.restore();
 
   if (logo) {
