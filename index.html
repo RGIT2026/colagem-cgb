@@ -1,9 +1,23 @@
+Entendido! Vamos resolver isso de vez. O problema com "algumas frases" acontecer em telas menores é porque frases longas demais acabavam forçando o tamanho da fonte a diminuir muito ou quebravam a lógica de colisão do canvas.
+
+Além disso, já fixei "SEGURANÇA ATIVA, NOSSO DNA 🧬" como a frase padrão do sistema (ela já aparece carregada direto no input e limpa).
+
+🛠️ O que foi ajustado nesta versão:
+Frase Padrão: O campo já inicia preenchido com "SEGURANÇA ATIVA, NOSSO DNA 🧬".
+
+Cálculo de Quebra Automática (Anti-Bug): Se a frase sugerida ou digitada for muito longa para o celular, o código agora reduz a fonte dinamicamente e centraliza com base no espaço real disponível antes do logo da direita, evitando que o texto fique colado na esquerda ou corte.
+
+Banco de Frases Enxuto: Deixei apenas frases cirúrgicas e diretas para o seu cenário de campo (redes elétricas, munck, posteamento).
+
+Substitua o código do seu arquivo por este atualizado:
+
+HTML
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colagem CGB - v7.0</title>
+<title>Colagem CGB - v7.1</title>
 <style>
   :root { --cgb-red: #b8001f; --cgb-dark: #1c1e21; --cgb-gray: #f0f2f5; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -53,7 +67,7 @@
   <div class="top-accent"></div>
   <header>
     <img id="ui-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAB2CAYAAAByH65QAABrn0lEQVR4nO39+Ztk2VXfC3/2cM6JKeesubq7etDUrckChJDkK7DAcOHasl+bF2NdLtbV/bcEr65fMXoC22ADhouQhRBCiJaQWt3qrq4xMysrpxjPtPe+P+yzT5yIyqrM6kypuyHX80RFRWTEOfvs2Hudtb7ru9YSnFDEA+/IuecgtnpMJQIW6FBQMMYhtUDYgtjCRaF48tx5d+PehjgA+kCmqhNajbCCFpKCbOZs0/H4dxwWCzjAiOoDzaGZ6o9nciZn8pYX/f08uMPrh/nnIBaYkAMCCYiyIAbWUDy9uOoudZZYOqfd97ZvixKHM2CSGIPBWcEEg2ocCx5Uk81zHTqgMzmTM3nbyCkqrGDRzNo6rvrXVW85N/1z6aDEoqVCWUMCXETz7t66e6a9zGKmcNEKnVbudLotbmPpZzkmUqANAKYyn0R1XFeNRTT+b+csu8YHz+RMzuRtJKdqYT1UBwjwCs3OmlgCZKIxWUEbxzkU7+6suXf11lgtHG4wxDrBuxZX6SRtJw5uiRsYisJg2hGYwp/UgauOa5ycnpKmAgWEfXCQZ4rrTM7kbSOnoLAOt6wQ4fUh1k1DXJYTOzhPxHsW1tw7WyusZpbWKIO8xCJQqeFKnDBK1l2ZbQuDZS8tpqNvunfV6evxuABaNcbx6CGdyZmcyVtUvj8Yljjk/276HN6KqgGcQ/LupXX3zt4aK6nFDYYYa+m1O0RRxP3+PmYCTy8vEXXbzu3eEtYZhkUDSJ8/b/OFE16BuvCXqcY6M7DO5EzePnJKCkvygGXVVCINZRUCfQpIgKvEPNtdcs8liyxlBjHJkBJMEtGPHVpbspZClwZlHE8kbUz3vItGW+IWlr6DlOnxaSowGmOws5aWqj4eIohnciZn8taXU3EJH45d2RpjwlkU3qpS1aMLvG/tontCd1nKHW4wAKC91GOsHTvDPsWo4NzqGl2jGOzto/KIdyytoaVy6eC2KPFAviEwFCwgKxReHKI4JZKHQvFnciZn8haWB2lUj30APVVYovonWDkOkk6HbDhAY1mQEdqWOBw9BO+/dM1dMxEraUmnAG0tRkCmHcMEMu1VSmSgl0uSUiAclFIyjmC3rflvGy+LXbylVAIFUCK9pRdrKH00MfAahPPKKtAhCuyZhXUmZ/I2kYfRlh5D5u2UELYDnCMbDmhJyYLQCFugcVwi4l3rF92a1LTLkthYlKuOIxxOgBW2ppo6MT22cl6xJcbSLiwfXL/qLhHRBdpAD0WMBWchL6fjqY9hT66lz+RMzuRNkVPCsBpKqwbZJTiLxtJB0XIlElgEnls95y4uLhNPcpSzGOkoXYPT6SA2ICvTR9spz8pI54F2ILKWJxZXMKVzt/c3xX0MKaYajSUP7qioxlNZU25+zGdyJmfytpBTcAmnBE1EhR9ha4B9ScVgcjrARRTPLl1w650uibHooqRlpwqpSYSw0nqcHK+4pJWzGTUCciUYWIdYXGA3HfHS/ZtiC8MYKFCMsBTCTQMBlbZSMy7hGeh+JmfydpFTpDXY6XOlrDSAyUmoLKvli+7JxRXUeAzjlEQoZKVLrJRYvOISDpJSzjAijKS2rMBTE5JSYvOSKC5Jog5l+5yzky2xhcNgiADrqG2u6otYdwqa+kzO5Ex+4HIqCms+LS9g7hpvNa2hecfqebeWdFDjMe3MkKBQBozziqhQ/lkIUBUhXhv//UJWlpDw7ARlIbIgLax2F9neH4ASXFleQbYTV+zeEgWWohrHDN3hzJw6kzN528opgO6VzJksgbqwgOTK+jl3YWmJuDQwTmk7WELRNY5OAYnxVoptfVIAFpIiFEh7dWzE9jwPqActAroFJZ2bllwgo6FjnGstXs8tXzJrRAjqzHMc7OcoIFlncmZnMnbRXQwsWZIlA/zlxquVBNvmv9O5KCD51n96NVn3KKFZJgSZyUtqVFCYrA457xJRYVhVUpLulpPYYLuakid6Czg7ug+q8vnSLTi3qBPaxLxnpU1WlK7cveG2KPFAviEwFCwgKxReHKI4JZKHQvFnciZn8haWB2lUj30APVVYovonWDkOkk6HbDhAY1mQEdqWOBw9BO+/dM1dMxEraUmnAG0tRkCmHcMEMu1VSmSgl0uSUiAclFIyjmC3rflvGy+LXbylVAIFUCK9pRdrKH00MfAahPPKKtAhCuyZhXUmZ/I2kYfRlh5D5u2UELYDnCMbDmhJyYLQCFugcVwi4l3rF92a1LTLkthYlKuOIxxOgBW2ppo6MT22cl6xJcbSLiwfXL/qLhHRBdpAD0WMBWchL6fjqY9hT66lz+RMzuRNkVPCsBpKqwbZJTiLxtJB0XIlElgEnls95y4uLhNPcpSzGOkoXYPT6SA2ICvTR9spz8iI=";
-    <h1>CGB POST <small style="font-size: 0.7rem; color: #94a3b8;">v7.0</small></h1>
+    <h1>CGB POST <small style="font-size: 0.7rem; color: #94a3b8;">v7.1</small></h1>
   </header>
   <div class="main-content">
     <div id="drop-zone" onclick="document.getElementById('file-input').click()">
@@ -121,7 +135,7 @@
       </div>
       <div class="field" style="margin-top: 12px; position: relative;">
         <label>Frase do Rodapé</label>
-        <input type="text" id="footer-text" value="SINALIZAÇÃO E SEGURANÇA EM OPERAÇÃO DE REDE ⚡">
+        <input type="text" id="footer-text" value="SEGURANÇA ATIVA, NOSSO DNA 🧬">
         <button class="btn-ia" style="top: -5px;" onclick="suggestPhrase()">💡 Sugerir Frase</button>
       </div>
     </div>
@@ -142,16 +156,14 @@ const LOGO_B64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAB2CAYAAABy
 
 let images = [], loadedImgs = [], captions = [], logo = null, maxPhotos = 12;
 
-// ——— FRASES MELHORADAS PARA O CONTEXTO OPERACIONAL DE CAMPO ———
+// ——— FRASES OPERACIONAIS CORRIGIDAS ———
 const CGB_PHRASES = [
+  "SEGURANÇA ATIVA, NOSSO DNA 🧬",
   "SINALIZAÇÃO E SEGURANÇA EM OPERAÇÃO DE REDE ⚡",
   "SEGURANÇA ATIVA: EQUIPE ALINHADA NO CAMPO 🛡️",
-  "MANUTENÇÃO E INFRAESTRUTURA COM FOCO EM ZERO ACIDENTES 🏗️",
-  "OPERAÇÕES COM MUNCK E VALORIZAÇÃO DA VIDA EM 1º LUGAR 🚛",
+  "OPERAÇÕES COM MUNCK E VALORIZAÇÃO DA VIDA TRABALHISTA 🚛",
   "PROCEDIMENTOS PADRONIZADOS E SINALIZAÇÃO ATIVA ✅",
-  "EXCELÊNCIA TÉCNICA E SEGURANÇA EM ALTURA O TEMPO TODO 🦺",
-  "COMPROMISSO INTERNO COM A QUALIDADE OPERACIONAL 💎",
-  "ZERO INCIDENTES: NOSSO MAIOR OBJETIVO DIÁRIO 💪"
+  "EXCELÊNCIA TÉCNICA E SEGURANÇA EM ALTURA 🦺"
 ];
 
 function suggestDesign() {
@@ -476,27 +488,29 @@ function generateCollage() {
   ctx.fillStyle = '#b8001f';
   ctx.fillRect(0, rodY, W, 4);
   
-  // ——— CÁLCULO EXATO DE CENTRALIZAÇÃO DO RODAPÉ ———
+  // ——— SISTEMA ANTI-BUG DE CENTRALIZAÇÃO DO RODAPÉ ———
   ctx.save();
   ctx.textBaseline = 'middle';
   
-  const logoWidthEstimate = logo ? 220 : 0;
-  // Área livre calculada desconsiderando o bloco do logo na direita
-  const areaLivreW = W - logoWidthEstimate - pad; 
-  const centroLivreX = areaLivreW / 2;
+  // Define o limite do logo à direita para evitar invasão do texto
+  const rightLogoWidth = logo ? 240 : 0;
+  const safeAreaW = W - rightLogoWidth - (pad * 2); 
+  const centerOfSafeArea = pad + (safeAreaW / 2);
 
-  let baseFontSize = 34;
-  ctx.font = `bold ${baseFontSize}px sans-serif`;
+  let fontSize = 34;
+  ctx.font = `bold ${fontSize}px sans-serif`;
   
-  let textWidth = ctx.measureText(phrase.toUpperCase()).width;
-  if (textWidth > (areaLivreW - pad)) {
-    baseFontSize = Math.floor(baseFontSize * ((areaLivreW - pad) / textWidth));
-    ctx.font = `bold ${baseFontSize}px sans-serif`;
+  // Encolhe a fonte dinamicamente se a frase for muito grande
+  let measuredW = ctx.measureText(phrase.toUpperCase()).width;
+  if (measuredW > safeAreaW) {
+    fontSize = Math.floor(fontSize * (safeAreaW / measuredW));
+    if(fontSize < 18) fontSize = 18; // Limite mínimo de legibilidade
+    ctx.font = `bold ${fontSize}px sans-serif`;
   }
   
   ctx.textAlign = 'center';
   ctx.fillStyle = '#ffffff';
-  ctx.fillText(phrase.toUpperCase(), centroLivreX, rodY + (rodH / 2) + 4);
+  ctx.fillText(phrase.toUpperCase(), centerOfSafeArea, rodY + (rodH / 2) + 2);
   ctx.restore();
 
   if (logo) {
@@ -549,6 +563,7 @@ function limpar() {
   document.getElementById('canvas-wrap').style.display = 'none';
   document.getElementById('btn-baixar').style.display = 'none';
   document.getElementById('btn-share').style.display = 'none';
+  document.getElementById('footer-text').value = "SEGURANÇA ATIVA, NOSSO DNA 🧬";
   setStatus('');
 }
 
