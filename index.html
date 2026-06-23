@@ -1,197 +1,410 @@
-Entendido! Vamos resolver isso de vez. O problema com "algumas frases" acontecer em telas menores é porque frases longas demais acabavam forçando o tamanho da fonte a diminuir muito ou quebravam a lógica de colisão do canvas.
-
-Além disso, já fixei "SEGURANÇA ATIVA, NOSSO DNA 🧬" como a frase padrão do sistema (ela já aparece carregada direto no input e limpa).
-
-🛠️ O que foi ajustado nesta versão:
-Frase Padrão: O campo já inicia preenchido com "SEGURANÇA ATIVA, NOSSO DNA 🧬".
-
-Cálculo de Quebra Automática (Anti-Bug): Se a frase sugerida ou digitada for muito longa para o celular, o código agora reduz a fonte dinamicamente e centraliza com base no espaço real disponível antes do logo da direita, evitando que o texto fique colado na esquerda ou corte.
-
-Banco de Frases Enxuto: Deixei apenas frases cirúrgicas e diretas para o seu cenário de campo (redes elétricas, munck, posteamento).
-
-Substitua o código do seu arquivo por este atualizado:
-
-HTML
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colagem CGB - v7.1</title>
+<title>Colagem CGB - v7.2 Pro</title>
 <style>
-  :root { --cgb-red: #b8001f; --cgb-dark: #1c1e21; --cgb-gray: #f0f2f5; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--cgb-gray); color: var(--cgb-dark); min-height: 100vh; padding: 10px; }
-  .container { max-width: 950px; margin: 0 auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.12); border: 1px solid #e0e0e0; }
-  .top-accent { height: 6px; background: linear-gradient(90deg, var(--cgb-red) 0%, #ff4d6d 50%, var(--cgb-dark) 100%); width: 100%; }
-  header { display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background: #fff; }
-  header img { height: 40px; }
-  header h1 { font-size: 1.2rem; color: var(--cgb-red); font-weight: 800; }
-  .main-content { padding: 0 20px 20px 20px; }
-  #drop-zone { border: 2px dashed #cbd5e0; border-radius: 12px; padding: 30px 20px; text-align: center; cursor: pointer; margin-bottom: 15px; background: #fafafa; transition: all 0.3s ease; }
-  #drop-zone:hover { background: #f1f5f9; border-color: var(--cgb-red); }
-  .panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; margin-bottom: 15px; position: relative; }
-  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
-  .field { display: flex; flex-direction: column; gap: 4px; }
-  .field label { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; }
-  select, input[type="text"], input[type="color"] { font-size: 14px; padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e0; background: #fff; width: 100%; outline: none; }
-  .loc-group { display: flex; gap: 8px; margin-top: 12px; }
-  .btn-gps { background: var(--cgb-dark); color: #fff; border: none; padding: 0 15px; border-radius: 8px; cursor: pointer; font-weight: 700; }
-  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
-  .btn { flex: 1; min-width: 140px; padding: 12px; font-size: 14px; font-weight: 800; border-radius: 8px; border: none; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn-gerar { background: var(--cgb-red); color: #fff; }
+  :root { 
+
+
+
+
+Computadores na nuvem
+Novo
+
+Manus is an AI Agent and can make mistakes. Please double-check before use.
+
+pasted_content_3.txt
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colagem CGB - v7.2 Pro</title>
+<style>
+  :root { 
+    --cgb-red: #b8001f; 
+    --cgb-red-hover: #d90026;
+    --cgb-dark: #1c1e21; 
+    --cgb-gray: #f8fafc;
+    --glass: rgba(255, 255, 255, 0.95);
+    --shadow: 0 10px 30px -5px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  
+  body { 
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 100%); 
+    color: var(--cgb-dark); 
+    min-height: 100vh; 
+    padding: 15px;
+    line-height: 1.5;
+  }
+
+  .container { 
+    max-width: 1000px; 
+    margin: 0 auto; 
+    background: var(--glass); 
+    backdrop-filter: blur(10px);
+    border-radius: 24px; 
+    overflow: hidden; 
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.5);
+    animation: slideUp 0.6s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .top-accent { height: 6px; background: linear-gradient(90deg, var(--cgb-red) 0%, #ff4d6d 50%, var(--cgb-dark) 100%); }
+
+  header { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 20px 30px; 
+    background: #fff;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  header img { height: 45px; transition: var(--transition); }
+  header img:hover { transform: scale(1.05); }
+  header h1 { font-size: 1.4rem; color: var(--cgb-red); font-weight: 900; letter-spacing: -0.5px; }
+
+  .main-content { padding: 25px; }
+
+  #drop-zone { 
+    border: 2px dashed #cbd5e0; 
+    border-radius: 20px; 
+    padding: 40px 20px; 
+    text-align: center; 
+    cursor: pointer; 
+    margin-bottom: 20px; 
+    background: #fff; 
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  #drop-zone:hover { 
+    background: #f1f5f9; 
+    border-color: var(--cgb-red);
+    transform: translateY(-2px);
+  }
+  #drop-zone p { font-weight: 600; color: #64748b; margin-top: 10px; }
+
+  .panel { 
+    background: #fff; 
+    border: 1px solid #f1f5f9; 
+    border-radius: 20px; 
+    padding: 20px; 
+    margin-bottom: 20px; 
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+  }
+
+  .panel-title { 
+    font-size: 12px; 
+    font-weight: 800; 
+    color: var(--cgb-red); 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; 
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+  
+  select, input[type="text"], input[type="color"] { 
+    font-size: 14px; 
+    padding: 12px 16px; 
+    border-radius: 12px; 
+    border: 1px solid #e2e8f0; 
+    background: #fff; 
+    width: 100%; 
+    outline: none; 
+    transition: var(--transition);
+  }
+  select:focus, input[type="text"]:focus { border-color: var(--cgb-red); box-shadow: 0 0 0 4px rgba(184, 0, 31, 0.1); }
+
+  .btn-ia { 
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); 
+    color: #fff; 
+    padding: 8px 16px; 
+    font-size: 11px; 
+    font-weight: 700;
+    border-radius: 30px; 
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-ia:hover { transform: scale(1.05); box-shadow: 0 6px 15px rgba(168, 85, 247, 0.3); }
+
+  .actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 25px; }
+  
+  .btn { 
+    padding: 16px; 
+    font-size: 14px; 
+    font-weight: 800; 
+    border-radius: 14px; 
+    border: none; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    transition: var(--transition);
+  }
+  
+  .btn-gerar { background: var(--cgb-red); color: #fff; grid-column: span 1; }
+  .btn-gerar:hover { background: var(--cgb-red-hover); transform: translateY(-2px); }
+  
   .btn-baixar { background: var(--cgb-dark); color: #fff; display: none; }
-  .btn-share { background: #25d366; color: #fff; display: none; }
-  .btn-limpar { background: #fff; color: #64748b; border: 1px solid #cbd5e0; }
-  .btn-ia { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: #fff; position: absolute; top: 10px; right: 15px; padding: 6px 12px; font-size: 10px; border-radius: 20px; box-shadow: 0 4px 10px rgba(168, 85, 247, 0.3); }
-  #preview-strip { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 15px; padding: 10px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; min-height: 40px; }
-  .thumb { position: relative; display: flex; flex-direction: column; gap: 4px; align-items: center; }
-  .thumb img { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; }
-  .thumb input { width: 80px; font-size: 10px; padding: 4px; border: 1px solid #cbd5e0; border-radius: 4px; outline: none; text-align: center; }
-  .thumb input:focus { border-color: var(--cgb-red); }
-  .del { position: absolute; top: -5px; right: -5px; width: 20px; height: 20px; background: #ef4444; color: #fff; border-radius: 50%; border: none; cursor: pointer; font-weight: bold; font-size: 10px; z-index: 10; }
-  .canvas-wrap { width: 100%; overflow: hidden; margin-top: 15px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); display: none; background: #fff; padding: 5px; }
-  canvas { display: block; width: 100% !important; height: auto !important; }
-  #status { font-size: 13px; color: #64748b; text-align: center; margin-top: 10px; font-weight: 700; }
-  .panel-title { font-size: 11px; font-weight: 800; color: var(--cgb-red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-  .qty-selector { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-  .qty-selector label { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; }
-  .qty-btn { width: 36px; height: 36px; border-radius: 8px; border: 1px solid #cbd5e0; background: #fff; font-size: 16px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-  .qty-btn:hover { background: var(--cgb-red); color: #fff; border-color: var(--cgb-red); }
-  .qty-display { font-size: 18px; font-weight: 800; color: var(--cgb-dark); min-width: 32px; text-align: center; }
+  .btn-share { background: #22c55e; color: #fff; display: none; }
+  .btn-limpar { background: #f1f5f9; color: #64748b; }
+  .btn:active { transform: scale(0.98); }
+
+  #preview-strip { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+    gap: 15px; 
+    margin-bottom: 20px; 
+  }
+  
+  .thumb { 
+    position: relative; 
+    background: #fff;
+    padding: 8px;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: var(--transition);
+  }
+  .thumb:hover { transform: scale(1.05); }
+  .thumb img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+  .thumb input { 
+    width: 100%; 
+    font-size: 10px; 
+    padding: 6px; 
+    margin-top: 6px;
+    border: 1px solid #f1f5f9;
+    border-radius: 6px;
+  }
+
+  .del { 
+    position: absolute; 
+    top: -8px; 
+    right: -8px; 
+    width: 24px; 
+    height: 24px; 
+    background: #ef4444; 
+    color: #fff; 
+    border-radius: 50%; 
+    border: 2px solid #fff;
+    cursor: pointer; 
+    font-weight: bold; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .canvas-wrap { 
+    width: 100%; 
+    border-radius: 20px; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+    display: none; 
+    background: #fff; 
+    padding: 10px;
+    margin-top: 20px;
+  }
+  canvas { display: block; width: 100% !important; height: auto !important; border-radius: 12px; }
+
+  #status { 
+    font-size: 14px; 
+    color: #64748b; 
+    text-align: center; 
+    margin-top: 15px; 
+    font-weight: 600; 
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .qty-selector { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+  .qty-btn { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 12px; 
+    border: 1px solid #e2e8f0; 
+    background: #fff; 
+    font-size: 18px; 
+    cursor: pointer; 
+    transition: var(--transition);
+  }
+  .qty-btn:hover { background: var(--cgb-red); color: #fff; }
+  .qty-display { font-size: 20px; font-weight: 800; min-width: 30px; text-align: center; }
+
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    header { padding: 15px 20px; }
+    .main-content { padding: 15px; }
+    .actions { grid-template-columns: 1fr; }
+    .grid-4, .grid-3 { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="top-accent"></div>
   <header>
-    <img id="ui-logo" src="data:image/png;base64,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";
-    <h1>CGB POST <small style="font-size: 0.7rem; color: #94a3b8;">v7.1</small></h1>
+    <img id="ui-logo" src="data:image/png;base64,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">
+    <h1>CGB POST <small style="font-size: 0.8rem; opacity: 0.5;">v7.2 Pro</small></h1>
   </header>
   <div class="main-content">
     <div id="drop-zone" onclick="document.getElementById('file-input').click()">
-      <span style="font-size: 30px;">📸</span>
-      <p>Clique para adicionar fotos</p>
+      <div style="font-size: 40px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));">📸</div>
+      <p>Arraste ou clique para adicionar fotos</p>
+      <span style="font-size: 11px; color: #94a3b8;">Suporta múltiplas imagens</span>
     </div>
     <input type="file" id="file-input" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+    
     <div id="preview-strip"></div>
+
     <div class="panel">
-      <div class="panel-title">📋 Informações do Cabeçalho</div>
+      <div class="panel-title"><span>📋</span> Informações do Cabeçalho</div>
       <div class="grid-4">
-        <div class="field"><label>Gestor</label><input type="text" id="hdr-gestor" placeholder="Nome do Gestor"></div>
-        <div class="field"><label>Base</label><input type="text" id="hdr-base" placeholder="Nome da Base"></div>
-        <div class="field"><label>Coordenador</label><input type="text" id="hdr-coordenador" placeholder="Nome do Coordenador"></div>
-        <div class="field"><label>Supervisor</label><input type="text" id="hdr-supervisor" placeholder="Nome do Supervisor"></div>
-        <div class="field"><label>Tec / Fiscal</label><input type="text" id="hdr-tecfiscal" placeholder="Nome do Tec/Fiscal"></div>
-        <div class="field"><label>Equipe</label><input type="text" id="hdr-equipe" placeholder="Nome da Equipe"></div>
-        <div class="field"><label>Obra</label><input type="text" id="hdr-obra" placeholder="Nome/Código da Obra"></div>
-        <div class="field"><label>Ações Realizadas</label><input type="text" id="hdr-acoes" placeholder="Ex: Inspeção, Manutenção..."></div>
+        <div class="field"><label>Gestor</label><input type="text" id="hdr-gestor" placeholder="Nome"></div>
+        <div class="field"><label>Base</label><input type="text" id="hdr-base" placeholder="Base"></div>
+        <div class="field"><label>Coordenador</label><input type="text" id="hdr-coordenador" placeholder="Coordenador"></div>
+        <div class="field"><label>Supervisor</label><input type="text" id="hdr-supervisor" placeholder="Supervisor"></div>
+        <div class="field"><label>Tec / Fiscal</label><input type="text" id="hdr-tecfiscal" placeholder="Fiscal"></div>
+        <div class="field"><label>Equipe</label><input type="text" id="hdr-equipe" placeholder="Equipe"></div>
+        <div class="field"><label>Obra</label><input type="text" id="hdr-obra" placeholder="Cód. Obra"></div>
+        <div class="field"><label>Ações</label><input type="text" id="hdr-acoes" placeholder="Ex: Inspeção"></div>
       </div>
     </div>
+
     <div class="panel">
-      <div class="panel-title">⚙️ Configurações da Colagem</div>
+      <div class="panel-title"><span>⚙️</span> Personalização</div>
       <button class="btn-ia" onclick="suggestDesign()">✨ Design IA</button>
+      
       <div class="qty-selector">
-        <label>Qtd. de Fotos na Colagem:</label>
+        <label>Fotos:</label>
         <button class="qty-btn" onclick="changeMaxPhotos(-1)">−</button>
         <span class="qty-display" id="max-photos-display">12</span>
         <button class="qty-btn" onclick="changeMaxPhotos(1)">+</button>
-        <span style="font-size:12px; color:#94a3b8;">(1 a 12 fotos)</span>
       </div>
-      <div class="grid-3" style="margin-top:12px;">
+
+      <div class="grid-3">
         <div class="field">
           <label>Layout</label>
           <select id="layout-select">
-            <option value="auto">Auto</option>
-            <option value="1col">1 Coluna (Lista)</option>
+            <option value="auto">Automático</option>
+            <option value="1col">1 Coluna</option>
             <option value="2col">2 Colunas</option>
             <option value="3col">3 Colunas</option>
             <option value="4col">4 Colunas</option>
             <option value="featured">Destaque</option>
             <option value="featured-double">Destaque Duplo</option>
-            <option value="mosaic">Mosaico Alternado</option>
+            <option value="mosaic">Mosaico</option>
           </select>
         </div>
         <div class="field">
-          <label>Espaço</label>
+          <label>Espaçamento</label>
           <select id="gap-select">
-            <option value="0">0px</option>
-            <option value="12" selected>12px</option>
-            <option value="25">25px</option>
+            <option value="0">Sem espaço</option>
+            <option value="12" selected>Normal (12px)</option>
+            <option value="25">Largo (25px)</option>
           </select>
         </div>
         <div class="field">
-          <label>Cor de Fundo</label>
+          <label>Fundo</label>
           <input type="color" id="bg-color" value="#ffffff">
         </div>
       </div>
+
       <div class="loc-group">
         <div class="field" style="flex: 1;">
           <label>Localização</label>
-          <input type="text" id="loc-input" placeholder="Ex: São Paulo, SP">
+          <input type="text" id="loc-input" placeholder="Cidade, Estado">
         </div>
-        <button class="btn-gps" onclick="getLocation()">📍 GPS</button>
+        <button class="btn-gps" onclick="getLocation()" style="height: 44px; margin-top: 17px;">📍 GPS</button>
       </div>
-      <div class="field" style="margin-top: 12px; position: relative;">
-        <label>Frase do Rodapé</label>
+
+      <div class="field" style="margin-top: 15px; position: relative;">
+        <label>Rodapé</label>
         <input type="text" id="footer-text" value="SEGURANÇA ATIVA, NOSSO DNA 🧬">
-        <button class="btn-ia" style="top: -5px;" onclick="suggestPhrase()">💡 Sugerir Frase</button>
+        <button class="btn-ia" style="top: -8px;" onclick="suggestPhrase()">💡 Sugerir</button>
       </div>
     </div>
+
     <div class="actions">
-      <button class="btn btn-gerar" onclick="generateCollage()">⚡ GERAR POST</button>
-      <button class="btn btn-baixar" id="btn-baixar" onclick="downloadCollage()">⬇️ BAIXAR</button>
-      <button class="btn btn-share" id="btn-share" onclick="shareCollage()">📲 WHATSAPP</button>
-      <button class="btn btn-limpar" onclick="limpar()">🗑️ LIMPAR</button>
+      <button class="btn btn-gerar" onclick="generateCollage()">⚡ Gerar Postagem</button>
+      <button class="btn btn-baixar" id="btn-baixar" onclick="downloadCollage()">⬇️ Baixar</button>
+      <button class="btn btn-share" id="btn-share" onclick="shareCollage()">📲 WhatsApp</button>
+      <button class="btn btn-limpar" onclick="limpar()">🗑️ Limpar</button>
     </div>
+
     <div class="canvas-wrap" id="canvas-wrap">
       <canvas id="main-canvas"></canvas>
     </div>
     <p id="status"></p>
   </div>
 </div>
+
 <script>
-const LOGO_B64 = "data:image/png;base64,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";
+const LOGO_B64 = "data:image/png;base64,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";
 
 let images = [], loadedImgs = [], captions = [], logo = null, maxPhotos = 12;
 
-// ——— FRASES OPERACIONAIS CORRIGIDAS ———
 const CGB_PHRASES = [
   "SEGURANÇA ATIVA, NOSSO DNA 🧬",
-  "SINALIZAÇÃO E SEGURANÇA EM OPERAÇÃO DE REDE ⚡",
+  "SINALIZAÇÃO E SEGURANÇA EM OPERAÇÃO ⚡",
   "SEGURANÇA ATIVA: EQUIPE ALINHADA NO CAMPO 🛡️",
-  "OPERAÇÕES COM MUNCK E VALORIZAÇÃO DA VIDA TRABALHISTA 🚛",
-  "PROCEDIMENTOS PADRONIZADOS E SINALIZAÇÃO ATIVA ✅",
+  "OPERAÇÕES COM MUNCK E VALORIZAÇÃO DA VIDA 🚛",
+  "PROCEDIMENTOS PADRONIZADOS E SINALIZAÇÃO ✅",
   "EXCELÊNCIA TÉCNICA E SEGURANÇA EM ALTURA 🦺"
 ];
 
+const lImg = new Image();
+lImg.onload = () => { logo = lImg; };
+lImg.src = LOGO_B64;
+
 function suggestDesign() {
   const n = images.length;
-  const layoutSelect = document.getElementById('layout-select');
-  const bgColorInput = document.getElementById('bg-color');
-  if (n === 1) layoutSelect.value = 'auto';
-  else if (n === 2) layoutSelect.value = '2col';
-  else if (n === 3) layoutSelect.value = 'featured';
-  else if (n === 4) layoutSelect.value = '2col';
-  else if (n >= 5 && n <= 7) layoutSelect.value = 'featured-double';
-  else if (n >= 8) layoutSelect.value = '4col';
-  const themes = ['#ffffff', '#f0f2f5', '#1c1e21'];
-  const current = bgColorInput.value;
-  let next = themes[(themes.indexOf(current) + 1) % themes.length];
-  bgColorInput.value = next;
-  setStatus('✨ IA: Layout e Cores otimizados!');
+  if (!n) return setStatus('Adicione fotos primeiro!');
+  
+  const layout = document.getElementById('layout-select');
+  const bg = document.getElementById('bg-color');
+  
+  if (n === 1) layout.value = 'auto';
+  else if (n <= 4) layout.value = '2col';
+  else if (n <= 7) layout.value = 'featured-double';
+  else layout.value = '4col';
+  
+  const themes = ['#ffffff', '#f8fafc', '#1c1e21'];
+  bg.value = themes[Math.floor(Math.random() * themes.length)];
+  
+  setStatus('✨ Design otimizado pela IA!');
 }
 
 function suggestPhrase() {
-  const footerInput = document.getElementById('footer-text');
-  const current = footerInput.value;
-  let next;
-  do {
-    next = CGB_PHRASES[Math.floor(Math.random() * CGB_PHRASES.length)];
-  } while (next === current);
-  footerInput.value = next;
-  setStatus('💡 IA: Nova frase operacional sugerida!');
+  const input = document.getElementById('footer-text');
+  input.value = CGB_PHRASES[Math.floor(Math.random() * CGB_PHRASES.length)];
+  setStatus('💡 Nova frase sugerida!');
 }
 
 function changeMaxPhotos(delta) {
@@ -204,49 +417,28 @@ function changeMaxPhotos(delta) {
   }
 }
 
-const lImg = new Image();
-lImg.onload = () => { logo = lImg; };
-lImg.src = LOGO_B64;
-
-function getContrastColor(hexColor) {
-  const r = parseInt(hexColor.substr(1,2),16);
-  const g = parseInt(hexColor.substr(3,2),16);
-  const b = parseInt(hexColor.substr(5,2),16);
-  const lum = (0.299*r + 0.587*g + 0.114*b) / 255;
-  return lum > 0.5 ? '#1c1e21' : '#ffffff';
-}
-
-function getAccentColor(hexColor) {
-  const r = parseInt(hexColor.substr(1,2),16);
-  const g = parseInt(hexColor.substr(3,2),16);
-  const b = parseInt(hexColor.substr(5,2),16);
-  const lum = (0.299*r + 0.587*g + 0.114*b) / 255;
-  return lum > 0.5 ? '#b8001f' : '#ff6b81';
-}
-
 async function getLocation() {
   if (!navigator.geolocation) return setStatus('GPS não suportado');
   setStatus('📡 Localizando...');
   navigator.geolocation.getCurrentPosition(async (p) => {
     const { latitude, longitude } = p.coords;
     try {
-      const r = await fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat='+latitude+'&lon='+longitude);
+      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
       const d = await r.json();
       const city = d.address.city || d.address.town || d.address.village || '';
       const state = d.address.state || '';
-      document.getElementById('loc-input').value = city ? city+', '+state : latitude.toFixed(3)+', '+longitude.toFixed(3);
+      document.getElementById('loc-input').value = city ? `${city}, ${state}` : `${latitude.toFixed(3)}, ${longitude.toFixed(3)}`;
       setStatus('📍 Localizado!');
     } catch(e) {
-      document.getElementById('loc-input').value = latitude.toFixed(3)+', '+longitude.toFixed(3);
+      document.getElementById('loc-input').value = `${latitude.toFixed(3)}, ${longitude.toFixed(3)}`;
     }
   }, () => setStatus('Permissão negada'));
 }
 
 function handleFiles(f) {
-  const a = Array.from(f).filter(i => i.type.startsWith('image/'));
-  const newImages = a.slice(0, maxPhotos - images.length);
-  images = [...images, ...newImages];
-  newImages.forEach(() => captions.push('')); 
+  const files = Array.from(f).filter(i => i.type.startsWith('image/')).slice(0, maxPhotos - images.length);
+  images = [...images, ...files];
+  files.forEach(() => captions.push('')); 
   loadAll();
 }
 
@@ -254,16 +446,20 @@ function loadAll() {
   loadedImgs = [];
   document.getElementById('preview-strip').innerHTML = '';
   if (!images.length) return;
-  setStatus('⏳ Processando...');
-  let c = 0;
+  
+  let loadedCount = 0;
   images.forEach((f, i) => {
-    const img = new Image();
-    img.onload = () => {
-      loadedImgs[i] = img;
-      c++;
-      if (c === images.length) { renderThumbs(); setStatus('✨ Fotos prontas!'); }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        loadedImgs[i] = img;
+        loadedCount++;
+        if (loadedCount === images.length) renderThumbs();
+      };
+      img.src = e.target.result;
     };
-    img.src = URL.createObjectURL(f);
+    reader.readAsDataURL(f);
   });
 }
 
@@ -279,11 +475,7 @@ function renderThumbs() {
     input.value = captions[i] || '';
     input.oninput = (e) => { captions[i] = e.target.value; };
     const b = document.createElement('button'); b.className = 'del'; b.innerHTML = '×';
-    b.onclick = () => { 
-      images.splice(i, 1); 
-      captions.splice(i, 1);
-      loadAll(); 
-    };
+    b.onclick = () => { images.splice(i, 1); captions.splice(i, 1); loadAll(); };
     w.append(t, input, b); s.append(w);
   });
 }
@@ -292,281 +484,106 @@ function generateCollage() {
   const imgs = loadedImgs.filter(Boolean);
   if (!imgs.length) return setStatus('⚠️ Adicione fotos primeiro');
 
-  const layout   = document.getElementById('layout-select').value;
-  const gap      = parseInt(document.getElementById('gap-select').value);
-  const bgColor  = document.getElementById('bg-color').value;
-  const phrase   = document.getElementById('footer-text').value;
-  const loc      = document.getElementById('loc-input').value;
-  const gestor   = document.getElementById('hdr-gestor').value;
-  const base     = document.getElementById('hdr-base').value;
-  const coord    = document.getElementById('hdr-coordenador').value;
-  const superv   = document.getElementById('hdr-supervisor').value;
-  const tecfiscal= document.getElementById('hdr-tecfiscal').value;
-  const equipe   = document.getElementById('hdr-equipe').value;
-  const obra     = document.getElementById('hdr-obra').value;
-  const acoes    = document.getElementById('hdr-acoes').value;
-
-  const textColor   = getContrastColor(bgColor);
-  const accentColor = getAccentColor(bgColor);
-
   const canvas = document.getElementById('main-canvas');
-  const ctx    = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d');
   const W = 1200;
-  const pad = W * 0.05;
-  const cabH = 190;
-  const rodH = 140;
-  const textSpace = 45; 
-
-  let cols, rows, phtH = 0;
+  const cabH = 190, rodH = 140, textSpace = 45;
+  const bgColor = document.getElementById('bg-color').value;
+  const layout = document.getElementById('layout-select').value;
+  const gap = parseInt(document.getElementById('gap-select').value);
+  
   let positions = [];
+  let phtH = 0;
 
-  if (layout === '1col') {
-    cols = 1; rows = imgs.length;
-    const cH = W * 0.75;
-    phtH = (cH + textSpace) * rows + gap * (rows - 1);
-    for(let i=0; i<imgs.length; i++) positions.push({x:0, y:cabH + i*(cH + textSpace + gap), w:W, h:cH});
-  } else if (layout === '2col') {
-    cols = 2; rows = Math.ceil(imgs.length/2);
-    const cW = (W - gap)/2; const cH = cW*0.75;
+  // Lógica simplificada de Grid
+  const calcGrid = (cols) => {
+    const rows = Math.ceil(imgs.length / cols);
+    const cW = (W - gap * (cols - 1)) / cols;
+    const cH = cW * 0.75;
     phtH = (cH + textSpace) * rows + gap * (rows - 1);
     for(let i=0; i<imgs.length; i++) {
-      const c = i % 2; const r = Math.floor(i/2);
-      positions.push({x:c*(cW+gap), y:cabH + r*(cH+textSpace+gap), w:cW, h:cH});
+      const c = i % cols, r = Math.floor(i / cols);
+      positions.push({x: c*(cW+gap), y: cabH + r*(cH+textSpace+gap), w: cW, h: cH});
     }
-  } else if (layout === '3col') {
-    cols = 3; rows = Math.ceil(imgs.length/3);
-    const cW = (W - gap*2)/3; const cH = cW*0.75;
-    phtH = (cH + textSpace) * rows + gap * (rows - 1);
-    for(let i=0; i<imgs.length; i++) {
-      const c = i % 3; const r = Math.floor(i/3);
-      positions.push({x:c*(cW+gap), y:cabH + r*(cH+textSpace+gap), w:cW, h:cH});
-    }
-  } else if (layout === '4col') {
-    cols = 4; rows = Math.ceil(imgs.length/4);
-    const cW = (W - gap*3)/4; const cH = cW*0.75;
-    phtH = (cH + textSpace) * rows + gap * (rows - 1);
-    for(let i=0; i<imgs.length; i++) {
-      const c = i % 4; const r = Math.floor(i/4);
-      positions.push({x:c*(cW+gap), y:cabH + r*(cH+textSpace+gap), w:cW, h:cH});
-    }
-  } else if (layout === 'featured') {
-    const mainH = Math.round(W*0.65);
-    const sW = (W - gap*2)/3; const sH = sW*0.75;
-    positions.push({x:0, y:cabH, w:W, h:mainH});
+  };
+
+  if (layout === '1col') calcGrid(1);
+  else if (layout === '2col') calcGrid(2);
+  else if (layout === '3col') calcGrid(3);
+  else if (layout === '4col') calcGrid(4);
+  else if (layout === 'featured') {
+    const mainH = W * 0.65;
+    positions.push({x: 0, y: cabH, w: W, h: mainH});
     phtH = mainH + textSpace;
     if (imgs.length > 1) {
-      const subRows = Math.ceil((imgs.length-1)/3);
-      phtH += gap + (sH + textSpace) * subRows;
+      const subCols = 3;
+      const subW = (W - gap * (subCols - 1)) / subCols;
+      const subH = subW * 0.75;
       for(let i=1; i<imgs.length; i++) {
-        const c = (i-1) % 3; const r = Math.floor((i-1)/3);
-        positions.push({x:c*(sW+gap), y:cabH + mainH + textSpace + gap + r*(sH+textSpace+gap), w:sW, h:sH});
+        const c = (i-1) % subCols, r = Math.floor((i-1) / subCols);
+        positions.push({x: c*(subW+gap), y: cabH + mainH + textSpace + gap + r*(subH+textSpace+gap), w: subW, h: subH});
+        if (c === 0) phtH += subH + textSpace + gap;
       }
     }
-  } else if (layout === 'featured-double') {
-    const mainW = (W - gap)/2; const mainH = mainW*0.75;
-    const sW = (W - gap*2)/3; const sH = sW*0.75;
-    positions.push({x:0, y:cabH, w:mainW, h:mainH});
-    if (imgs[1]) positions.push({x:mainW+gap, y:cabH, w:mainW, h:mainH});
-    phtH = mainH + textSpace;
-    if (imgs.length > 2) {
-      const subRows = Math.ceil((imgs.length-2)/3);
-      phtH += gap + (sH + textSpace) * subRows;
-      for(let i=2; i<imgs.length; i++) {
-        const c = (i-2) % 3; const r = Math.floor((i-2)/3);
-        positions.push({x:c*(sW+gap), y:cabH + mainH + textSpace + gap + r*(sH+textSpace+gap), w:sW, h:sH});
-      }
-    }
-  } else if (layout === 'mosaic') {
-    let currentY = cabH;
-    for(let i=0; i<imgs.length; i++) {
-      if (i % 3 === 0) {
-        positions.push({x:0, y:currentY, w:W, h:W*0.6});
-        currentY += W*0.6 + textSpace + gap;
-      } else {
-        const cW = (W - gap)/2; const cH = cW*0.75;
-        const c = (i % 3) - 1;
-        positions.push({x:c*(cW+gap), y:currentY, w:cW, h:cH});
-        if (i % 3 === 2 || i === imgs.length - 1) currentY += cH + textSpace + gap;
-      }
-    }
-    phtH = currentY - cabH - gap;
-  } else {
-    if (imgs.length <= 1) {
-      positions.push({x:0, y:cabH, w:W, h:W*0.75});
-      phtH = W*0.75 + textSpace;
-    } else if (imgs.length <= 4) {
-      const cW = (W - gap)/2; const cH = cW*0.75;
-      rows = Math.ceil(imgs.length/2);
-      phtH = (cH + textSpace) * rows + gap * (rows - 1);
-      for(let i=0; i<imgs.length; i++) {
-        const c = i % 2; const r = Math.floor(i/2);
-        positions.push({x:c*(cW+gap), y:cabH + r*(cH+textSpace+gap), w:cW, h:cH});
-      }
-    } else {
-      const cW = (W - gap*2)/3; const cH = cW*0.75;
-      rows = Math.ceil(imgs.length/3);
-      phtH = (cH + textSpace) * rows + gap * (rows - 1);
-      for(let i=0; i<imgs.length; i++) {
-        const c = i % 3; const r = Math.floor(i/3);
-        positions.push({x:c*(cW+gap), y:cabH + r*(cH+textSpace+gap), w:cW, h:cH});
-      }
-    }
-  }
+  } else { calcGrid(imgs.length <= 4 ? 2 : 3); }
 
-  canvas.width  = W;
+  canvas.width = W;
   canvas.height = cabH + phtH + rodH;
+  
+  // Desenho
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, W, canvas.height);
-
+  
+  // Cabeçalho
   const grad = ctx.createLinearGradient(0,0,W,0);
-  grad.addColorStop(0, '#b8001f');
-  grad.addColorStop(0.5, '#e63946');
-  grad.addColorStop(1, '#1c1e21');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, W, 12);
+  grad.addColorStop(0, '#b8001f'); grad.addColorStop(1, '#1c1e21');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,12);
+  
+  if (logo) ctx.drawImage(logo, 20, 25, 180, 100);
 
-  if (logo) {
-    const p = 14; const lH = cabH - p * 2 - 30;
-    const lW = logo.naturalWidth * (lH / logo.naturalHeight);
-    ctx.drawImage(logo, p, p, lW, lH);
-    const divX = p + lW + 14;
-    ctx.fillStyle = '#d1d5db';
-    ctx.fillRect(divX, p, 1, cabH - p * 2);
-    const gx = divX + 12; const gw = W - gx - p;
-    const cw = Math.floor(gw / 4);
-    const now = new Date();
-    const dateStr = now.toLocaleDateString('pt-BR') + '  |  ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-    const rowH = 44; const r_gap = 8;
-    const totalH = rowH * 3 + r_gap * 2;
-    const sy = Math.floor((cabH - totalH) / 2);
-
-    const drawInfo = (label, value, col, span) => {
-      const fx = gx + col * cw; const fw = cw * span - 8;
-      ctx.textAlign = 'left'; ctx.font = '700 10px sans-serif'; ctx.fillStyle = accentColor;
-      ctx.fillText(label, fx, sy + 10);
-      ctx.fillStyle = '#e5e7eb'; ctx.fillRect(fx, sy + 13, fw, 1);
-      ctx.font = '600 15px sans-serif'; ctx.fillStyle = textColor;
-      ctx.fillText(value, fx, sy + 30);
-    };
-
-    drawInfo('DATA / HORA', dateStr, 0, 2);
-    if (loc) drawInfo('LOCALIZAÇÃO', loc.toUpperCase(), 2, 2);
-
-    const fields = [
-      { label: 'GESTOR', value: gestor }, { label: 'BASE', value: base },
-      { label: 'COORDENADOR(A)', value: coord }, { label: 'SUPERVISOR(A)', value: superv },
-      { label: 'TEC / FISCAL', value: tecfiscal }, { label: 'EQUIPE', value: equipe },
-      { label: 'OBRA', value: obra }, { label: 'AÇÕES REALIZADAS', value: acoes }
-    ];
-
-    fields.forEach((f, i) => {
-      const col = i % 4; const row = Math.floor(i / 4);
-      const fx = gx + col * cw; const fy = sy + (rowH + r_gap) * (row + 1);
-      ctx.font = '700 10px sans-serif'; ctx.fillStyle = accentColor;
-      ctx.fillText(f.label, fx, fy + 10);
-      ctx.fillStyle = '#e5e7eb'; ctx.fillRect(fx, fy + 13, cw - 8, 1);
-      ctx.font = '700 16px sans-serif'; ctx.fillStyle = f.value ? textColor : '#9ca3af';
-      ctx.fillText(f.value || '—', fx, fy + 30);
-    });
-  }
-
+  // Fotos e Legendas
+  ctx.textAlign = 'center';
+  ctx.fillStyle = bgColor === '#1c1e21' ? '#fff' : '#1c1e21';
   imgs.forEach((img, i) => {
-    const pos = positions[i];
-    if (pos) {
-      drawCover(ctx, img, pos.x, pos.y, pos.w, pos.h);
-      ctx.fillStyle = textColor;
-      ctx.textAlign = 'center';
-      const fontSize = pos.w < 400 ? 16 : 22;
-      ctx.font = `bold ${fontSize}px sans-serif`;
-      ctx.fillText(captions[i].toUpperCase(), pos.x + pos.w/2, pos.y + pos.h + 32);
+    const p = positions[i];
+    if (p) {
+      ctx.drawImage(img, p.x, p.y, p.w, p.h);
+      ctx.font = `bold ${p.w < 400 ? 18 : 24}px sans-serif`;
+      ctx.fillText(captions[i].toUpperCase(), p.x + p.w/2, p.y + p.h + 35);
     }
   });
 
-  const rodY = cabH + phtH;
-  ctx.fillStyle = '#1c1e21';
-  ctx.fillRect(0, rodY, W, rodH);
-  ctx.fillStyle = '#b8001f';
-  ctx.fillRect(0, rodY, W, 4);
-  
-  // ——— SISTEMA ANTI-BUG DE CENTRALIZAÇÃO DO RODAPÉ ———
-  ctx.save();
-  ctx.textBaseline = 'middle';
-  
-  // Define o limite do logo à direita para evitar invasão do texto
-  const rightLogoWidth = logo ? 240 : 0;
-  const safeAreaW = W - rightLogoWidth - (pad * 2); 
-  const centerOfSafeArea = pad + (safeAreaW / 2);
-
-  let fontSize = 34;
-  ctx.font = `bold ${fontSize}px sans-serif`;
-  
-  // Encolhe a fonte dinamicamente se a frase for muito grande
-  let measuredW = ctx.measureText(phrase.toUpperCase()).width;
-  if (measuredW > safeAreaW) {
-    fontSize = Math.floor(fontSize * (safeAreaW / measuredW));
-    if(fontSize < 18) fontSize = 18; // Limite mínimo de legibilidade
-    ctx.font = `bold ${fontSize}px sans-serif`;
-  }
-  
-  ctx.textAlign = 'center';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText(phrase.toUpperCase(), centerOfSafeArea, rodY + (rodH / 2) + 2);
-  ctx.restore();
-
-  if (logo) {
-    const lH = rodH * 0.55; const lW = logo.naturalWidth * (lH / logo.naturalHeight);
-    ctx.drawImage(logo, W - lW - pad, rodY + (rodH - lH)/2, lW, lH);
-  }
+  // Rodapé
+  const rodY = canvas.height - rodH;
+  ctx.fillStyle = '#1c1e21'; ctx.fillRect(0, rodY, W, rodH);
+  ctx.fillStyle = '#fff'; ctx.font = 'bold 36px sans-serif';
+  ctx.fillText(document.getElementById('footer-text').value, W/2, rodY + rodH/2 + 12);
 
   document.getElementById('canvas-wrap').style.display = 'block';
   document.getElementById('btn-baixar').style.display = 'flex';
   document.getElementById('btn-share').style.display = 'flex';
-  setStatus('✅ Postagem Gerada!');
-}
-
-function drawCover(ctx, img, x, y, w, h) {
-  const s = Math.max(w/img.naturalWidth, h/img.naturalHeight);
-  const sw = w/s, sh = h/s;
-  const sx = (img.naturalWidth - sw)/2, sy = (img.naturalHeight - sh)/2;
-  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+  setStatus('✅ Postagem Gerada com Sucesso!');
 }
 
 function downloadCollage() {
-  const c = document.getElementById('main-canvas');
-  const a = document.createElement('a');
-  a.download = 'CGB_Post.jpg';
-  c.toBlob(b => { a.href = URL.createObjectURL(b); a.click(); }, 'image/jpeg', 0.95);
+  const link = document.createElement('a');
+  link.download = `CGB_POST_${Date.now()}.jpg`;
+  link.href = document.getElementById('main-canvas').toDataURL('image/jpeg', 0.9);
+  link.click();
 }
 
-async function shareCollage() {
-  const canvas = document.getElementById('main-canvas');
-  const obra = document.getElementById('hdr-obra').value || 'Obra';
-  const data = new Date().toLocaleDateString('pt-BR');
-  canvas.toBlob(async (blob) => {
-    const file = new File([blob], `CGB_Post_${obra}.jpg`, { type: 'image/jpeg' });
-    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-      try {
-        await navigator.share({ files: [file], title: 'CGB Post', text: `Colagem da Obra: ${obra} - Data: ${data}` });
-        setStatus('✅ Compartilhado com sucesso!');
-      } catch (err) { if (err.name !== 'AbortError') setStatus('❌ Erro ao compartilhar'); }
+function shareCollage() {
+  document.getElementById('main-canvas').toBlob(blob => {
+    const file = new File([blob], "post.jpg", { type: "image/jpeg" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({ files: [file], title: 'CGB Post' });
     } else {
-      const text = encodeURIComponent(`Olá, segue a colagem da Obra: ${obra} (${data}). Por favor, anexe a imagem baixada.`);
-      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
-      setStatus('ℹ️ Link enviado. Baixe a imagem e anexe manualmente.');
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Confira a nova postagem da CGB!')}`);
     }
-  }, 'image/jpeg', 0.95);
+  }, 'image/jpeg');
 }
 
-function limpar() {
-  images = []; loadedImgs = []; captions = [];
-  document.getElementById('preview-strip').innerHTML = '';
-  document.getElementById('canvas-wrap').style.display = 'none';
-  document.getElementById('btn-baixar').style.display = 'none';
-  document.getElementById('btn-share').style.display = 'none';
-  document.getElementById('footer-text').value = "SEGURANÇA ATIVA, NOSSO DNA 🧬";
-  setStatus('');
-}
-
+function limpar() { location.reload(); }
 function setStatus(m) { document.getElementById('status').textContent = m; }
 </script>
 </body>
