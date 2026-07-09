@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SobreAviso CGB - Equipes SKYs</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding: 20px; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #BA113B 0%, #8B0A2E 100%); color: white; padding: 30px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .logo-section { display: flex; align-items: center; gap: 20px; }
+        .logo-section img { height: 60px; width: auto; }
+        .header-text h1 { font-size: 28px; font-weight: 700; margin-bottom: 5px; }
+        .info-box { background: rgba(255, 255, 255, 0.1); padding: 15px 20px; border-radius: 5px; font-size: 14px; }
+        .content { padding: 30px 20px; }
+        
+        /* ALERTA DE EQUIPE ATIVA */
+        .alert-box { background: #BA113B; color: white; padding: 25px; border-radius: 10px; margin-bottom: 30px; text-align: center; box-shadow: 0 8px 25px rgba(186, 17, 59, 0.3); }
+        .alert-box h2 { font-size: 28px; margin-bottom: 10px; }
+        .alert-box .team-names { font-size: 22px; font-weight: 700; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 5px; margin: 10px 0; }
+
+        .team-section { margin-bottom: 30px; border: 2px solid #E6E6E6; border-radius: 8px; overflow: hidden; }
+        .team-section.active { border: 3px solid #BA113B; }
+        .team-header { background: #494947; color: white; padding: 15px 20px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .team-header.active { background: #BA113B; }
+        .badge { background: #FFD700; color: #BA113B; padding: 5px 12px; border-radius: 15px; font-size: 12px; font-weight: 700; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #494947; color: white; padding: 12px; text-align: left; font-size: 13px; }
+        .active th { background: #BA113B; }
+        td { padding: 12px; border-bottom: 1px solid #E6E6E6; font-size: 14px; }
+        
+        .whatsapp-btn { display: inline-flex; align-items: center; gap: 5px; padding: 8px 12px; background: #25D366; color: white; text-decoration: none; border-radius: 5px; font-size: 12px; font-weight: 600; }
+        
+        .footer { background: #F2F2F2; padding: 20px; text-align: center; color: #666; font-size: 12px; }
+        
+        @media (max-width: 768px) {
+            .header { flex-direction: column; text-align: center; }
+            table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-section">
+                <img src="cgbengenharia.png" alt="Logo CGB">
+                <div class="header-text">
+                    <h1>SOBREAVISO EQUIPES SKYs</h1>
+                    <p>CGB Engenharia - JULHO 2026</p>
+                </div>
+            </div>
+            <div class="info-box">
+                <strong>Hoje:</strong> <span id="current-date"></span>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="active-alert"></div>
+            <div id="main-content"></div>
+        </div>
+
+        <div class="footer">
+            <p>Sistema de Sobreaviso Automático | CGB Engenharia</p>
+        </div>
+    </div>
+
+    <script>
+        // ESCALAS DE JULHO 2026
+        const scales = [
+            {
+                start: "2026-07-04", end: "2026-07-11", display: "04/07 a 11/07/2026",
+                members: [
+                    { name: "MARCIRIO CESAR VIANA DA SILVA NETO", phone: "99985451637", prefix: "MA-PDT-V001M" },
+                    { name: "ATAIDES DA SILVA", phone: "99991270267", prefix: "MA-PDT-V001M" },
+                    { name: "MAILSON MARTINS PEREIRA", phone: "99981597049", prefix: "MA-PDT-V001M" }
+                ]
+            },
+            {
+                start: "2026-07-11", end: "2026-07-18", display: "11/07 a 18/07/2026",
+                members: [
+                    { name: "FERNANDO MELO DA COSTA", phone: "99900000000", prefix: "PDS350" },
+                    { name: "MARCOS ANDRE DE SOUSA ARAUJO", phone: "99900000000", prefix: "PDS350" }
+                ]
+            },
+            {
+                start: "2026-07-18", end: "2026-07-25", display: "18/07 a 25/07/2026",
+                members: [
+                    { name: "GERALDO MOREIRA RODRIGUES", phone: "99991176663", prefix: "PDT351" },
+                    { name: "RICARDO DA CONCEICAO ARAUJO", phone: "99991128854", prefix: "PDT351" }
+                ]
+            },
+            {
+                start: "2026-07-25", end: "2026-08-01", display: "25/07 a 01/08/2026",
+                members: [
+                    { name: "JARBEM ROSA SOUSA", phone: "98970111629", prefix: "MA-BDC-V001M" },
+                    { name: "RAILTON SILVA", phone: "99988180010", prefix: "MA-BDC-V001M" }
+                ]
+            }
+        ];
+
+        function checkStatus(start, nextStart) {
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            const s = new Date(start);
+            const next = new Date(nextStart);
+            // A equipe é ativa desde a sua data inicial até o início da próxima equipe
+            return today >= s && today < next;
+        }
+
+        function render() {
+            const container = document.getElementById('main-content');
+            const alertBox = document.getElementById('active-alert');
+            let activeFound = false;
+
+            scales.forEach((scale, index) => {
+                // A data final de uma equipe é o início da próxima
+                const nextStart = scales[index + 1] ? scales[index + 1].start : "2099-12-31";
+                const isActive = checkStatus(scale.start, nextStart);
+                
+                if (isActive) {
+                    activeFound = true;
+                    alertBox.innerHTML = `
+                        <div class="alert-box">
+                            <h2>🚨 EQUIPE EM PLANTÃO AGORA</h2>
+                            <p>Período de Responsabilidade: ${scale.display}</p>
+                            <div class="team-names">${scale.members.map(m => m.name.split(' ')[0]).join(' • ')}</div>
+                            <p style="font-size: 14px; opacity: 0.9;">Esta equipe responde pelo sobreaviso até o início da próxima escala.</p>
+                        </div>
+                    `;
+                }
+
+                const html = `
+                    <div class="team-section ${isActive ? 'active' : ''}">
+                        <div class="team-header ${isActive ? 'active' : ''}">
+                            <span>📅 CICLO: ${scale.display}</span>
+                            ${isActive ? '<span class="badge">🔴 RESPONSÁVEL ATUAL</span>' : ''}
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>NOME</th>
+                                    <th>PREFIXO</th>
+                                    <th>WHATSAPP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${scale.members.map(m => `
+                                    <tr>
+                                        <td><strong>${m.name}</strong></td>
+                                        <td>${m.prefix}</td>
+                                        <td>
+                                            <a href="https://wa.me/55${m.phone.replace(/\D/g,'')}" target="_blank" class="whatsapp-btn">
+                                                💬 Chamar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+
+            if (!activeFound) {
+                alertBox.innerHTML = `<div style="padding: 20px; text-align: center; color: #666; background: #eee; border-radius: 10px; margin-bottom: 20px;">
+                    Aguardando início do próximo ciclo de sobreaviso.
+                </div>`;
+            }
+        }
+
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+        render();
+    </script>
+</body>
+</html>
