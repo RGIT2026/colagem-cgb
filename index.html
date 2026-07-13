@@ -9,8 +9,12 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding: 20px; min-height: 100vh; }
         .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); overflow: hidden; }
         .header { background: linear-gradient(135deg, #BA113B 0%, #8B0A2E 100%); color: white; padding: 30px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        
+        /* CONTAINER DA LOGO COM CONTRASTE BRANCO */
         .logo-section { display: flex; align-items: center; gap: 20px; }
-        .logo-section img { height: 60px; width: auto; }
+        .logo-container { background: white; padding: 8px 15px; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .logo-section img { height: 50px; width: auto; object-fit: contain; }
+        
         .header-text h1 { font-size: 28px; font-weight: 700; margin-bottom: 5px; }
         .info-box { background: rgba(255, 255, 255, 0.1); padding: 15px 20px; border-radius: 5px; font-size: 14px; }
         .content { padding: 30px 20px; }
@@ -39,6 +43,7 @@
         @media (max-width: 768px) {
             .header { flex-direction: column; text-align: center; }
             table { display: block; overflow-x: auto; }
+            .logo-section { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
@@ -46,10 +51,12 @@
     <div class="container">
         <div class="header">
             <div class="logo-section">
-                <img src="cgbengenharia.png" alt="Logo CGB">
+                <!-- Caixa branca adicionada para dar destaque e contraste à logo escura -->
+                <div class="logo-container">
+                    <img src="cgbengenharia.png" alt="Logo CGB">
+                </div>
                 <div class="header-text">
                     <h1>SOBREAVISO EQUIPES SKYs</h1>
-                    <img src="cgbengenharia.png" alt="Logo CGB">
                     <p>CGB Engenharia - JULHO 2026</p>
                 </div>
             </div>
@@ -76,6 +83,7 @@
                 members: [
                     { name: "MARCIRIO CESAR VIANA DA SILVA NETO", phone: "(99) 985451637", prefix: "MA-PDT-V001M" },
                     { name: "ATAIDES DA SILVA", phone: "(99) 991270267", prefix: "MA-PDT-V001M" },
+                    { name: "MAILSON MARTINS PEREIRA", phone: "(99) 981597049", prefix: "MA-PDT-V001M" },
                     { name: "MARCELO DIAS MIRANDA", phone: "(99) 991466209", prefix: "MA-PDT-V001M" },
                     { name: "WALEF SILVA PEREIRA", phone: "(99) 985286010", prefix: "MA-PDT-V001M" }
                 ]
@@ -96,7 +104,7 @@
                     { name: "GERALDO MOREIRA RODRIGUES", phone: "(99) 991176663", prefix: "MA-PDT-V002M" },
                     { name: "RICARDO DA CONCEICAO ARAUJO", phone: "(99) 991128854", prefix: "MA-PDT-V002M" },
                     { name: "LUIS WALLAS CRUZ OLIVEIRA", phone: "(93) 984358047", prefix: "MA-PDT-V002M" },
-                    { name: "MAILSON MARTINS PEREIRA", phone: "(99) 981597049", prefix: "MA-PDT-V001M" },
+                    { name: "RUBENILSON RODRIGUES DA COSTA LIMA", phone: "(99) 981040385", prefix: "MA-PDT-V002M" }
                 ]
             },
             {
@@ -105,6 +113,7 @@
                     { name: "JARBEM ROSA SOUSA", phone: "(98) 970111629", prefix: "MA-BDC-V001M" },
                     { name: "RAILTON SILVA", phone: "(99) 988180010", prefix: "MA-BDC-V001M" },
                     { name: "FRANCISCO DE ASSIS ROCHA", phone: "(98) 988113760", prefix: "MA-BDC-V001M" },
+                    { name: "SERGIO BALBINO DE ARAUJO TAVARES", phone: "(71) 983421935", prefix: "MA-BDC-V001M" },
                     { name: "LUIS FELIPE DOS SANTOS", phone: "(89) 995978598", prefix: "MA-BDC-V001M" },
                     { name: "ANTONIO MARCOS MERCES SANTOS", phone: "(91) 985948142", prefix: "MA-BDC-V001M" }
                 ]
@@ -150,7 +159,6 @@
 
                 const html = `
                     <div class="team-section ${isActive ? 'active' : ''}">
-                        <div class="team-section-header">
                         <div class="team-header ${isActive ? 'active' : ''}">
                             <span>📅 FIM DE SEMANA: ${scale.display}</span>
                             ${isActive ? '<span class="badge">🔴 SOBREAVISO ATIVO</span>' : ''}
