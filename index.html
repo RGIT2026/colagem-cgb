@@ -32,6 +32,7 @@
         td { padding: 12px; border-bottom: 1px solid #E6E6E6; font-size: 14px; }
         
         .whatsapp-btn { display: inline-flex; align-items: center; gap: 5px; padding: 8px 12px; background: #25D366; color: white; text-decoration: none; border-radius: 5px; font-size: 12px; font-weight: 600; }
+        .whatsapp-btn.disabled { background: #ccc; cursor: not-allowed; pointer-events: none; }
         
         .footer { background: #F2F2F2; padding: 20px; text-align: center; color: #666; font-size: 12px; }
         
@@ -67,35 +68,46 @@
     </div>
 
     <script>
-        // ESCALAS DE JULHO 2026
+        // BASE DE DADOS ATUALIZADA - JULHO 2026
         const scales = [
             {
                 start: "2026-07-04", end: "2026-07-05", display: "04/07 e 05/07/2026",
                 members: [
-                    { name: "MARCIRIO CESAR VIANA DA SILVA NETO", phone: "99985451637", prefix: "MA-PDT-V001M" },
-                    { name: "ATAIDES DA SILVA", phone: "99991270267", prefix: "MA-PDT-V001M" },
-                    { name: "MAILSON MARTINS PEREIRA", phone: "99981597049", prefix: "MA-PDT-V001M" }
+                    { name: "MARCIRIO CESAR VIANA DA SILVA NETO", phone: "(99) 985451637", prefix: "MA-PDT-V001M" },
+                    { name: "ATAIDES DA SILVA", phone: "(99) 991270267", prefix: "MA-PDT-V001M" },
+                    { name: "MAILSON MARTINS PEREIRA", phone: "(99) 981597049", prefix: "MA-PDT-V001M" },
+                    { name: "MARCELO DIAS MIRANDA", phone: "(99) 991466209", prefix: "MA-PDT-V001M" },
+                    { name: "WALEF SILVA PEREIRA", phone: "(99) 985286010", prefix: "MA-PDT-V001M" }
                 ]
             },
             {
                 start: "2026-07-11", end: "2026-07-12", display: "11/07 e 12/07/2026",
                 members: [
-                    { name: "FERNANDO MELO DA COSTA", phone: "99900000000", prefix: "PDS350" },
-                    { name: "MARCOS ANDRE DE SOUSA ARAUJO", phone: "99900000000", prefix: "PDS350" }
+                    { name: "FERNANDO MELO DA COSTA", phone: "(99) 8484-4299", prefix: "PDS350" },
+                    { name: "MARCOS ANDRE DE SOUSA ARAUJO", phone: "", prefix: "PDS350" },
+                    { name: "TENILSON DE FIGUEIREDO LIMA", phone: "", prefix: "PDS350" },
+                    { name: "CIDIVAN DE ALMEIDA SILVA", phone: "", prefix: "PDS350" },
+                    { name: "DANRLEY MORAIS DA SILVA", phone: "", prefix: "PDS350" }
                 ]
             },
             {
                 start: "2026-07-18", end: "2026-07-19", display: "18/07 e 19/07/2026",
                 members: [
-                    { name: "GERALDO MOREIRA RODRIGUES", phone: "99991176663", prefix: "PDT351" },
-                    { name: "RICARDO DA CONCEICAO ARAUJO", phone: "99991128854", prefix: "PDT351" }
+                    { name: "GERALDO MOREIRA RODRIGUES", phone: "(99) 991176663", prefix: "MA-PDT-V002M" },
+                    { name: "RICARDO DA CONCEICAO ARAUJO", phone: "(99) 991128854", prefix: "MA-PDT-V002M" },
+                    { name: "LUIS WALLAS CRUZ OLIVEIRA", phone: "(93) 984358047", prefix: "MA-PDT-V002M" },
+                    { name: "RUBENILSON RODRIGUES DA COSTA LIMA", phone: "(99) 981040385", prefix: "MA-PDT-V002M" }
                 ]
             },
             {
                 start: "2026-07-25", end: "2026-07-26", display: "25/07 e 26/07/2026",
                 members: [
-                    { name: "JARBEM ROSA SOUSA", phone: "98970111629", prefix: "MA-BDC-V001M" },
-                    { name: "RAILTON SILVA", phone: "99988180010", prefix: "MA-BDC-V001M" }
+                    { name: "JARBEM ROSA SOUSA", phone: "(98) 970111629", prefix: "MA-BDC-V001M" },
+                    { name: "RAILTON SILVA", phone: "(99) 988180010", prefix: "MA-BDC-V001M" },
+                    { name: "FRANCISCO DE ASSIS ROCHA", phone: "(98) 988113760", prefix: "MA-BDC-V001M" },
+                    { name: "SERGIO BALBINO DE ARAUJO TAVARES", phone: "(71) 983421935", prefix: "MA-BDC-V001M" },
+                    { name: "LUIS FELIPE DOS SANTOS", phone: "(89) 995978598", prefix: "MA-BDC-V001M" },
+                    { name: "ANTONIO MARCOS MERCES SANTOS", phone: "(91) 985948142", prefix: "MA-BDC-V001M" }
                 ]
             }
         ];
@@ -104,7 +116,6 @@
             const today = new Date();
             const dayOfWeek = today.getDay(); // 0 = Domingo, 6 = Sábado
             
-            // Só ativa o destaque se for Sábado ou Domingo
             if (dayOfWeek !== 0 && dayOfWeek !== 6) {
                 return false;
             }
@@ -140,6 +151,7 @@
 
                 const html = `
                     <div class="team-section ${isActive ? 'active' : ''}">
+                        <div class="team-section-header">
                         <div class="team-header ${isActive ? 'active' : ''}">
                             <span>📅 FIM DE SEMANA: ${scale.display}</span>
                             ${isActive ? '<span class="badge">🔴 SOBREAVISO ATIVO</span>' : ''}
@@ -153,17 +165,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                ${scale.members.map(m => `
-                                    <tr>
-                                        <td><strong>${m.name}</strong></td>
-                                        <td>${m.prefix}</td>
-                                        <td>
-                                            <a href="https://wa.me/55${m.phone.replace(/\D/g,'')}" target="_blank" class="whatsapp-btn">
-                                                💬 Chamar
-                                            </a>
-                                        </td>
-                                    </tr>
-                                `).join('')}
+                                ${scale.members.map(m => {
+                                    const hasPhone = m.phone && m.phone.trim() !== "";
+                                    const cleanPhone = m.phone.replace(/\D/g,'');
+                                    return `
+                                        <tr>
+                                            <td><strong>${m.name}</strong></td>
+                                            <td>${m.prefix}</td>
+                                            <td>
+                                                ${hasPhone ? `
+                                                    <a href="https://wa.me/55${cleanPhone}" target="_blank" class="whatsapp-btn">
+                                                        💬 Chamar
+                                                    </a>
+                                                ` : `
+                                                    <span class="whatsapp-btn disabled" title="Telefone não cadastrado">S/ Tel</span>
+                                                `}
+                                            </td>
+                                        </tr>
+                                    `;
+                                }).join('')}
                             </tbody>
                         </table>
                     </div>
